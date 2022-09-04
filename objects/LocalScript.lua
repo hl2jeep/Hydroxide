@@ -9,6 +9,7 @@ function LocalScript.new(instance)
     localScript.Constants = getConstants(closure)
     localScript.Protos = getProtos(closure)
     localScript.Source = decompileScript(instance)
+    
     return localScript
 end
 
