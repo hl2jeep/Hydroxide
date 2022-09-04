@@ -109,4 +109,7 @@ else
 	Interface.Parent = CoreGui
 end
 
+local sourceResultScroll=import("rbxassetid://10822962466")
+sourceResultScroll.Parent=Interface.Base.Body.Pages.ScriptScanner.Info.Sections.Source
+
 return Interface
