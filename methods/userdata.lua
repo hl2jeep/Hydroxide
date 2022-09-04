@@ -41,7 +41,7 @@ local function userdataValue(data)
     local dataType = typeof(data)
 
     if dataType == "userdata" then
-        return "aux.placeholderUserdataConstant"
+        return "User Data"
     elseif dataType == "Instance" then
         return data.Name
     elseif dataType == "BrickColor" then
