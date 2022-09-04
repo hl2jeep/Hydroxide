@@ -124,6 +124,26 @@ local function createConstant(index, value)
     ListButton.new(instance, constantsList)
 end
 
+local function createEnvironment(index, value, tbpos)
+    local instance = Assets.ConstantPod:Clone() -- For now, both will have the same icon
+    local information = instance.Information
+    local indexWidth = TextService:GetTextSize(tbpos, 18, "SourceSans", constants.textWidth).X + 8    
+
+    information.Icon.Image = "http://www.roblox.com/asset/?id=5538723428"
+    information.Icon.ImageColor3 = Color3.fromRGB(139, 190, 255)
+    information.Label.TextColor3 = Color3.fromRGB(139, 190, 255)
+
+    information.Index.Text = tbpos
+
+    information.Index.Size = UDim2.new(0, indexWidth, 0, 20)
+    information.Label.Size = UDim2.new(1, -(indexWidth + 20), 1, 0)
+    information.Icon.Position = UDim2.new(0, indexWidth, 0, 2)
+    information.Label.Position = UDim2.new(0, indexWidth + 20, 0, 0)
+    information.Label.Text = toString(index)
+    
+    ListButton.new(instance, environmentList)
+end
+
 -- Log Object
 local Log = {}
 
@@ -162,9 +182,11 @@ function Log.new(localScript)
                 createConstant(i, v)
             end
 
-            -- for i,v in pairs(localScript.Environment) do
-            --     createEnvironment(i, v)
-            -- end
+            local num=1
+            for i,v in pairs(localScript.Environment) do
+                createEnvironment(i, v, num)
+                num+=1
+            end
 
             -- script decompilation here
 
