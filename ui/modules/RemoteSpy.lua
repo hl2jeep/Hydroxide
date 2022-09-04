@@ -831,6 +831,32 @@ removeContextSelected:SetCallback(function()
     selected.logs = {}
 end)
 
+copyArgumentsContext:SetCallback(function()
+    local oldStatus = oh.getStatus()
+    oh.setStatus("Copying Remote Arguments ...")
+    
+    if #selected.args>0 then
+        local arguments=""
+        table.foreach(selected.args, function(i,v)
+            local valueType=type(v)
+            if valueType == "userdata" or valueType == "vector" then
+                v = (typeof(v) == "Instance" and getInstancePath(v)) or userdataValue(v)
+            elseif valueType == "table" then
+                v = tableToString(v)
+            elseif valueType == "string" then
+                v = dataToString(v)
+            else
+                v = toString(v)
+            end
+            arguments=arguments..v..", "
+        end)
+        setclipboard(arguments)
+    end
+    
+    task.wait(0.25)
+    oh.setStatus(oldStatus)
+end)
+
 scriptContext:SetCallback(function()
     local script = ""
     local selectedRemote = selected.remoteLog.Remote.Instance
@@ -957,18 +983,6 @@ viewAsHexContext:SetCallback(function()
             end
         end
     end
-end)
-
-copyArgumentsContext:SetCallback(function()
-    local oldStatus = oh.getStatus()
-    oh.setStatus("Copying Remote Arguments ...")
-    
-    if #selected.args>0 then
-        setclipboard(table.concat(selected.args, ", "))
-    end
-    
-    task.wait(0.25)
-    oh.setStatus(oldStatus)
 end)
 
 removeConditionContext:SetCallback(function()
