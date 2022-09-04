@@ -188,7 +188,7 @@ function Log.new(localScript)
                 num+=1
             end
 
-            -- script decompilation here
+            InfoSource.ResultScroll.ResultStatus.Text=localScript.Source
 
             selected.scriptLog = log
         end
