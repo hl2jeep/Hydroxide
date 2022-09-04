@@ -51,6 +51,7 @@ local ProtosResults = ProtosResultsClip.Content
 local scriptList = List.new(ListResults)
 local protosList = List.new(ProtosResults)
 local constantsList = List.new(ConstantsResults)
+local environmentList = List.new(EnvironmentResults)
 
 local scriptLogs = {}
 local selected = {}
