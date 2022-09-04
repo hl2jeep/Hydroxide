@@ -6,9 +6,13 @@ local client = players.LocalPlayer
 local function getInstancePath(instance)
     local name = instance.Name
     local head = (#name > 0 and '.' .. name) or "['']"
+
+    if string.find(head, " ") then
+        head=("['%s']"):format(name)
+    end
     
     if not instance.Parent and instance ~= game then
-        return head .. " --[[ PARENTED TO NIL OR DESTROYED ]]"
+        return "getnilinstances()"..head
     end
     
     if instance == game then
