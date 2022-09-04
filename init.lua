@@ -70,11 +70,10 @@ local globalMethods = {
     isFolder = isfolder,
     isFile = isfile,
     decompileScript = function(script: LocalScript|ModuleScript)
-        local decompiler=(identifyexecutor and identifyexecutor()=="ScriptWare") and loadstring(game:HttpGet"https://raw.githubusercontent.com/TheSeaweedMonster/Luau/main/decompile.lua")() or decompile
-        if not decompiler then
+        if not decompile or (identifyexecutor and identifyexecutor()=="ScriptWare") then
             return "This exploit has no decompiler."
         end
-        return tostring(decompiler(script))
+        return tostring(decompile(script))
     end
 }
 
