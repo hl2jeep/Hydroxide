@@ -69,6 +69,13 @@ local globalMethods = {
     makeFolder = makefolder,
     isFolder = isfolder,
     isFile = isfile,
+    decompileScript = function(script: LocalScript|ModuleScript)
+        local decompiler=(identifyexecutor and identifyexecutor()=="ScriptWare") and loadstring(game:HttpGet"https://raw.githubusercontent.com/TheSeaweedMonster/Luau/main/decompile.lua")() or decompile
+        if not decompiler then
+            return "This exploit has no decompiler."
+        end
+        return tostring(decompiler(script))
+    end
 }
 
 if PROTOSMASHER_LOADED then
