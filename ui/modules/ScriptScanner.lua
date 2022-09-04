@@ -118,6 +118,14 @@ local function createConstant(index, value)
         end
         
         information.Label.Text = functionName
+    elseif valueType == "userdata" then
+        information.Label.Text=(typeof(value)=="Instance" and getInstancePath(value) or userdataValue(value))
+    elseif valueType == "table" then
+        if #value==0 then
+            information.Label.Text="Empty Table"
+        else
+            information.Label.Text="Table"
+        end
     else
         information.Label.Text = toString(value)
     end
