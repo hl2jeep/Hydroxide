@@ -103,6 +103,7 @@ local callingScriptContext = ContextMenuButton.new("rbxassetid://4800244808", "G
 local spyClosureContext = ContextMenuButton.new("rbxassetid://4666593447", "Spy Calling Function")
 local repeatCallContext = ContextMenuButton.new("rbxassetid://4907151581", "Repeat Call")
 local viewAsHexContext = ContextMenuButton.new("rbxassetid://9058292613", "Toggle String Hex View")
+local copyArgumentsContext = ContextMenuButton.new("rbxassetid://4891705738", "Copy Arguments")
 
 local removeConditionContext = ContextMenuButton.new("rbxassetid://4702831188", "Remove Condition")
 
@@ -118,7 +119,7 @@ local removeConditionContextSelected = ContextMenuButton.new("rbxassetid://47028
 
 local remoteListMenu = ContextMenu.new({ pathContext, conditionContext, clearContext, ignoreContext, blockContext, removeContext })
 local remoteListMenuSelected = ContextMenu.new({ pathContextSelected, clearContextSelected, ignoreContextSelected, unignoreContextSelected, blockContextSelected, unblockContextSelected, removeContextSelected })
-local remoteLogsMenu = ContextMenu.new({ scriptContext, callingScriptContext, spyClosureContext, repeatCallContext, viewAsHexContext })
+local remoteLogsMenu = ContextMenu.new({ scriptContext, callingScriptContext, spyClosureContext, repeatCallContext, viewAsHexContext, copyArgumentsContext})
 local remoteConditionMenu = ContextMenu.new({ removeConditionContext })
 local remoteConditionMenuSelected = ContextMenu.new({ removeConditionContextSelected })
 
@@ -684,7 +685,7 @@ pathContext:SetCallback(function()
 
     oh.setStatus("Copying " .. selectedInstance.Name .. "'s path")
     setClipboard(getInstancePath(selectedInstance))
-    wait(0.25)
+    task.wait(0.25)
     oh.setStatus(oldStatus)
 end)
 
@@ -883,7 +884,7 @@ scriptContext:SetCallback(function()
         setClipboard(script .. '\n' .. remotePath .. ':' .. method .. '(' .. args:sub(1, -3) .. ')')
     end
 
-    wait(0.25)
+    task.wait(0.25)
     oh.setStatus(oldStatus)
 end)
 
@@ -892,7 +893,7 @@ callingScriptContext:SetCallback(function()
 
     oh.setStatus("Copying " .. selected.callingScript.Name .. "'s path")
     setClipboard(getInstancePath(selected.callingScript))
-    wait(0.25)
+    task.wait(0.25)
     oh.setStatus(oldStatus)
 end)
 
@@ -930,7 +931,7 @@ repeatCallContext:SetCallback(function()
 
     remoteInstance[method](remoteInstance, unpack(selected.args))
 
-    wait(0.25)
+    task.wait(0.25)
 
     oh.setStatus(oldStatus)
 end)
@@ -956,6 +957,18 @@ viewAsHexContext:SetCallback(function()
             end
         end
     end
+end)
+
+copyArgumentsContext:SetCallback(function()
+    local oldStatus = oh.getStatus()
+    oh.setStatus("Copying Remote Arguments ...")
+    
+    if #selected.args>0 then
+        setclipboard(table.concat(selected.args, ", "))
+    end
+    
+    task.wait(0.25)
+    oh.setStatus(oldStatus)
 end)
 
 removeConditionContext:SetCallback(function()
