@@ -302,6 +302,9 @@ function Log.new(remote)
 
         for _i, call in pairs(remote.Logs) do
             ArgsLog.new(log, call)
+            if #remote.Logs > 400 then
+                task.wait(#remote.Logs/20000) -- Will probably prevent crashing
+            end
         end
 
         checkCurrentBlocked()
