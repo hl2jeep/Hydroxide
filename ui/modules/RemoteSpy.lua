@@ -374,18 +374,31 @@ local function createArg(instance, index, value)
 
     arg.Icon.Image = oh.Constants.Types[valueType]
     arg.Index.Text = index
+    local a=false
     
     if valueType == "table" then
         if #value==0 then
             arg.Label.Text = "Empty Table"
+            a=true
         else
             arg.Label.Text = "Table"
+        end
+    elseif valueType=="function" then
+        local name=getInfo(value).name
+        if name=='' then
+            arg.Label.Text="Unnamed function"
+            a=true
+            if getInfo(value).currentline==1 then
+                arg.Label.Text="Empty Function"
+            end
+        else
+            arg.Label.Text=toString(name)
         end
     else
         arg.Label.Text = dataToString(value)
     end
     
-    arg.Label.TextColor3 = (valueType=="table" and #value==0 and oh.Constants.Syntax["unnamed_function"] or oh.Constants.Syntax[valueType])
+    arg.Label.TextColor3 = (a and oh.Constants.Syntax["unnamed_function"] or oh.Constants.Syntax[valueType])
     arg.Name = tostring(index)
     arg.Parent = instance.Contents
 
