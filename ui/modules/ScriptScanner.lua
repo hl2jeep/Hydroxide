@@ -65,6 +65,8 @@ local constants = {
 }
 
 local pathContext = ContextMenuButton.new("rbxassetid://4891705738", "Get Script Path")
+local copyContext = ContextMenuButton.new("rbxassetid://4891705738", "Copy Value")
+environmentList:BindContextMenu(ContextMenu.new({copyContext}))
 scriptList:BindContextMenu(ContextMenu.new({ pathContext }))
 
 pathContext:SetCallback(function()
@@ -72,6 +74,25 @@ pathContext:SetCallback(function()
 
     setClipboard(getInstancePath(selectedInstance))
     MessageBox.Show("Success", ("%s's path was copied to your clipboard."):format(selectedInstance.Name), MessageType.OK)
+end)
+
+copyContext:SetCallback(function()
+    local selectedEnv=selected.selectedEnv
+    local val=selectedEnv.value
+
+    if val then
+        local valType=type(val)
+        if valType=="userdata" then
+            val=(typeof(val)=="Instance" and getInstancePath(val) or userdataValue(val))
+        elseif valType=="table" then
+            val=tableToString(val)
+        else
+            val=toString(val)
+        end
+        setClipboard(val)
+    end
+
+    MessageBox.Show("Success", ("%s's value was copied to your clipboard."):format(selectedEnv.index), MessageType.OK)
 end)
 
 local function createProto(index, value)
@@ -133,7 +154,7 @@ local function createConstant(index, value)
     ListButton.new(instance, constantsList)
 end
 
-local function createEnvironment(index, value, tbpos)
+local function createEnvironment(index, value, tbpos, instance)
     local instance = Assets.ConstantPod:Clone() -- For now, both will have the same icon
     local information = instance.Information
     local indexWidth = TextService:GetTextSize(tbpos, 18, "SourceSans", constants.textWidth).X + 8    
@@ -149,8 +170,10 @@ local function createEnvironment(index, value, tbpos)
     information.Icon.Position = UDim2.new(0, indexWidth, 0, 2)
     information.Label.Position = UDim2.new(0, indexWidth + 20, 0, 0)
     information.Label.Text = toString(index)
-    
-    ListButton.new(instance, environmentList)
+
+    ListButton.new(instance, environmentList):SetRightCallback(function()
+        selected.selectedEnv={index=index, value=value, numindex=tbpos, Instance=instance}
+    end)
 end
 
 -- Log Object
@@ -193,7 +216,7 @@ function Log.new(localScript)
 
             local num=1
             for i,v in pairs(localScript.Environment) do
-                createEnvironment(i, v, num)
+                createEnvironment(i, v, num, localScript.Instance)
                 num+=1
             end
 
