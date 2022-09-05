@@ -192,7 +192,10 @@ local function createEnvironment(index, value, tbpos, Instance)
     information.Label.Size = UDim2.new(1, -(indexWidth + 20), 1, 0)
     information.Icon.Position = UDim2.new(0, indexWidth, 0, 2)
     information.Label.Position = UDim2.new(0, indexWidth + 20, 0, 0)
-    information.Label.Text = toString(index)
+    information.Label.Text = (toString(index)=="" and "Empty String" or toString(index))
+    if toString(index)=="" then
+        information.Label.TextColor3=oh.Constants.Syntax["unnamed_function"]
+    end
 
     ListButton.new(instance, environmentList):SetRightCallback(function()
         selected.selectedEnv={index=index, value=value, numindex=tbpos, Instance=Instance}
