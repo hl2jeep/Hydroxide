@@ -65,8 +65,8 @@ local constants = {
 }
 
 local pathContext = ContextMenuButton.new("rbxassetid://4891705738", "Get Script Path")
-local copyContext = ContextMenuButton.new("rbxassetid://4891705738", "Copy Value")
-environmentList:BindContextMenu(ContextMenu.new({copyContext}))
+local copyContext = ContextMenuButton.new("rbxassetid://4891705738", "Copy Env Value")
+environmentList:BindContextMenu(ContextMenu.new({ copyContext }))
 scriptList:BindContextMenu(ContextMenu.new({ pathContext }))
 
 pathContext:SetCallback(function()
