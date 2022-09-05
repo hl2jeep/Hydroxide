@@ -376,12 +376,16 @@ local function createArg(instance, index, value)
     arg.Index.Text = index
     
     if valueType == "table" then
-        arg.Label.Text = toString(value)
+        if #value==0 then
+            arg.Label.Text = "Empty Table"
+        else
+            arg.Label.Text = "Table"
+        end
     else
         arg.Label.Text = dataToString(value)
     end
     
-    arg.Label.TextColor3 = oh.Constants.Syntax[valueType]
+    arg.Label.TextColor3 = (valueType=="table" and #value==0 and oh.Constants.Syntax["unnamed_function"] or oh.Constants.Syntax[valueType])
     arg.Name = tostring(index)
     arg.Parent = instance.Contents
 
@@ -899,6 +903,8 @@ scriptContext:SetCallback(function()
                 script = script .. ("local oh%s%d = %s\n"):format(variableName, i, v) 
             elseif valueType == "string" then
                 v = dataToString(v)
+            elseif valueType == "function" then
+                v = "function() end"
             else
                 v = toString(v)
             end
