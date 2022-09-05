@@ -104,7 +104,7 @@ copyEnvContext:SetCallback(function()
 end)
 
 copyProtoNameContext:SetCallback(function()
-    if selected.selectedProto then
+    if selected.selectedProto and selected.selectedProto.name~="" then
         setClipboard(selected.selectedProto.name)
         MessageBox.Show("Success", ("%s was copied to your clipboard."):format(selected.selectedProto.name), MessageType.OK)
     end
