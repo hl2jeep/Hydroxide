@@ -65,8 +65,16 @@ local constants = {
 }
 
 local pathContext = ContextMenuButton.new("rbxassetid://4891705738", "Get Script Path")
-local copyContext = ContextMenuButton.new("rbxassetid://4891705738", "Copy Env Value")
-environmentList:BindContextMenu(ContextMenu.new({ copyContext }))
+
+local copyEnvContext = ContextMenuButton.new("rbxassetid://4891705738", "Copy Env Value")
+local copyProtoNameContext = ContextMenuButton.new("rbxassetid://4891705738", "Copy Proto Name")
+local copyProtoInfoContext = ContextMenuButton.new("rbxassetid://4891705738", "Copy Proto Info")
+local copyConstantValue = ContextMenuButton.new("rbxassetid://4891705738", "Copy Constant Value")
+
+environmentList:BindContextMenu(ContextMenu.new({ copyEnvContext }))
+protosList:BindContextMenu(ContextMenu.new({ copyProtoNameContext, copyProtoInfoContext }))
+constantsList:BindContextMenu(ContextMenu.new({ copyConstantValue }))
+
 scriptList:BindContextMenu(ContextMenu.new({ pathContext }))
 
 pathContext:SetCallback(function()
@@ -76,7 +84,7 @@ pathContext:SetCallback(function()
     MessageBox.Show("Success", ("%s's path was copied to your clipboard."):format(selectedInstance.Name), MessageType.OK)
 end)
 
-copyContext:SetCallback(function()
+copyEnvContext:SetCallback(function()
     local selectedEnv=selected.selectedEnv
     local val=selectedEnv.value
 
@@ -95,7 +103,37 @@ copyContext:SetCallback(function()
     MessageBox.Show("Success", ("%s's value was copied to your clipboard."):format(selectedEnv.index), MessageType.OK)
 end)
 
-local function createProto(index, value)
+copyProtoNameContext:SetCallback(function()
+    if selected.selectedProto then
+        setClipboard(selected.selectedProto.name)
+        MessageBox.Show("Success", ("%s was copied to your clipboard."):format(selected.selectedProto.name), MessageType.OK)
+    end
+end)
+
+copyProtoInfoContext:SetCallback(function()
+    if selected.selectedProto then
+        setClipboard(tableToString(getInfo(selected.selectedProto.value)))
+        MessageBox.Show("Success", ("A table with %s's information was copied to your clipboard."):format(selected.selectedProto.name), MessageType.OK)
+    end
+end)
+
+copyConstantValue:SetCallback(function()
+    if selected.selectedConstant and not type(selected.selectedConstant.value)=="function" then
+        local toCopy=selected.selectedConstant.value
+        local vType=type(toCopy)
+        if vType=="userdata" then
+            toCopy=(typeof(toCopy)=="Instance" and getInstancePath(toCopy) or userdataValue(toCopy))
+        elseif vType=="table" then
+            toCopy=tableToString(toCopy)
+        else
+            toCopy=toString(toCopy)
+        end
+        setClipboard(toCopy)
+        MessageBox.Show("Success", ("The value of the constant %d was copied to your clipboard."):format(selected.selectedConstant.index), MessageType.OK)
+    end
+end)
+
+local function createProto(index, value, Instance)
     local instance = Assets.ProtoPod:Clone()
     local information = instance.Information
     local functionName = getInfo(value).name or ''
@@ -114,10 +152,13 @@ local function createProto(index, value)
     information.Icon.Position = UDim2.new(0, indexWidth, 0, 2)
     information.Label.Position = UDim2.new(0, indexWidth + 20, 0, 0)
 
-    ListButton.new(instance, protosList)
+    ListButton.new(instance, protosList):SetRightCallback(function()
+        selected.selectedProto={index=index, value=value, Instance=Instance, name=toString(getInfo(value).name or '')}
+        selected.selectedProtoLog=instance
+    end)
 end
 
-local function createConstant(index, value)
+local function createConstant(index, value, Instance)
     local instance = Assets.ConstantPod:Clone()
     local information = instance.Information
     local valueType = type(value)
@@ -152,10 +193,13 @@ local function createConstant(index, value)
         information.Label.Text = toString(value)
     end
     
-    ListButton.new(instance, constantsList)
+    ListButton.new(instance, constantsList):SetRightCallback(function()
+        selected.selectedConstant={index=index, value=value, Instance=Instance}
+        selected.selectedConstantLog=instance
+    end)
 end
 
-local function createEnvironment(index, value, tbpos, instance)
+local function createEnvironment(index, value, tbpos, Instance)
     local instance = Assets.ConstantPod:Clone() -- For now, both will have the same icon
     local information = instance.Information
     local indexWidth = TextService:GetTextSize(tbpos, 18, "SourceSans", constants.textWidth).X + 8    
@@ -173,7 +217,8 @@ local function createEnvironment(index, value, tbpos, instance)
     information.Label.Text = toString(index)
 
     ListButton.new(instance, environmentList):SetRightCallback(function()
-        selected.selectedEnv={index=index, value=value, numindex=tbpos, Instance=instance}
+        selected.selectedEnv={index=index, value=value, numindex=tbpos, Instance=Instance}
+        selected.selectedEnvironmentLog=instance
     end)
 end
 
@@ -209,11 +254,11 @@ function Log.new(localScript)
             InfoScript.Position = UDim2.new(1, -nameLength, 0, 0)
 
             for i,v in pairs(localScript.Protos) do
-                createProto(i, v)
+                createProto(i, v, localScript.Instance)
             end 
 
             for i,v in pairs(localScript.Constants) do
-                createConstant(i, v)
+                createConstant(i, v, localScript.Instance)
             end
 
             local num=1
