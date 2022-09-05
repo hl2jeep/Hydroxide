@@ -195,6 +195,7 @@ function Log.new(localScript)
         if selected.scriptLog ~= log then
             protosList:Clear()
             constantsList:Clear()
+            environmentList:Clear()
             
             ScriptList.Visible = false
             ScriptInfo.Visible = true
