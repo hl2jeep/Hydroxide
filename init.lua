@@ -298,6 +298,7 @@ end
 useMethods(import("methods/string"))
 useMethods(import("methods/table"))
 useMethods(import("methods/userdata"))
-useMethods(import("methods/environment"))
+-- Doesnt seem to be used anywhere in hydroxide
+-- useMethods(import("methods/environment"))
 
 --import("ui/main")
