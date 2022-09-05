@@ -388,7 +388,7 @@ local function createArg(instance, index, value)
         if name=='' then
             arg.Label.Text="Unnamed function"
             a=true
-            if getInfo(value).currentline==1 then
+            if getInfo(value).currentline==1 and getConstants(value)=={} then
                 arg.Label.Text="Empty Function"
             end
         else
