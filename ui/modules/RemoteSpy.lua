@@ -853,7 +853,7 @@ copyArgumentsContext:SetCallback(function()
             end
             arguments=arguments..v..", "
         end)
-        setclipboard(arguments)
+        setClipboard(arguments)
     end
     
     task.wait(0.25)
