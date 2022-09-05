@@ -199,7 +199,7 @@ local releaseInfo = HttpService:JSONDecode(game:HttpGetAsync("https://api.github
 
 if readFile and writeFile then
     local hasFolderFunctions = (isFolder and makeFolder) ~= nil
-    local ran, result = pcall(readFile, "version.oh")
+    local ran, result = pcall(readFile, (isUsingSynV3() and "ohVersion.txt" or "version.oh"))
 
     if not ran or releaseInfo.tag_name ~= result then
         if hasFolderFunctions then
@@ -260,7 +260,7 @@ if readFile and writeFile then
             return unpack(assets)
         end
 
-        writeFile("version.oh", releaseInfo.tag_name)
+        writeFile((isUsingSynV3() and "ohVersion.txt" or "version.oh"), releaseInfo.tag_name)
     elseif ran and releaseInfo.tag_name == result then
         function environment.import(asset)
             if importCache[asset] then
