@@ -113,7 +113,9 @@ end)
 copyProtoInfoContext:SetCallback(function()
     if selected.selectedProto then
         setClipboard(tableToString(getInfo(selected.selectedProto.value)))
-        MessageBox.Show("Success", ("A table with %s's information was copied to your clipboard."):format(selected.selectedProto.name), MessageType.OK)
+        MessageBox.Show("Success", ("A table with %s's information was copied to your clipboard."):format(
+            (selected.selectedProto.name=="" and "the unnamed function" or selected.selectedProto.name)
+        ), MessageType.OK)
     end
 end)
 
