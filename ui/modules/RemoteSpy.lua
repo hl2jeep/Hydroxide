@@ -845,17 +845,7 @@ copyArgumentsContext:SetCallback(function()
     if #selected.args>0 then
         local arguments=""
         table.foreach(selected.args, function(i,v)
-            local valueType=type(v)
-            if valueType == "userdata" or valueType == "vector" then
-                v = (typeof(v) == "Instance" and getInstancePath(v)) or userdataValue(v)
-            elseif valueType == "table" then
-                v = tableToString(v)
-            elseif valueType == "string" then
-                v = dataToString(v)
-            else
-                v = toString(v)
-            end
-            arguments=arguments..v..", "
+            arguments=arguments..(type(v)=="function" and "function() end" or dataToString(v))..(#selected.args>1 and ", " or "")
         end)
         setClipboard(arguments)
     end
