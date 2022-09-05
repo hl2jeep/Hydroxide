@@ -118,7 +118,7 @@ copyProtoInfoContext:SetCallback(function()
 end)
 
 copyConstantValue:SetCallback(function()
-    if selected.selectedConstant and not type(selected.selectedConstant.value)=="function" then
+    if selected.selectedConstant then
         local toCopy=selected.selectedConstant.value
         local vType=type(toCopy)
         if vType=="userdata" then
