@@ -69,7 +69,14 @@ local function toUnicode(string)
     return codepoints:sub(1, -3) .. ')'
 end
 
+local function hasSpecialCharacter(str: string)
+    if string.match(str, "[%w%s]+") == str then
+        return false
+    else return true end
+end
+
 methods.toString = toString
 methods.dataToString = dataToString
 methods.toUnicode = toUnicode
-return methods
+methods.hasSpecialCharacter = hasSpecialCharacter
+return methods  
