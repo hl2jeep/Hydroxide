@@ -74,6 +74,10 @@ local globalMethods = {
             return "This exploit has no decompiler."
         end
         return tostring(decompile(script))
+    end,
+    isUsingSynV3=function()
+        local executor, version = identifyexecutor and identifyexecutor()
+        return (executor and version) and (executor=="Synapse X" and not version:find("v2"))
     end
 }
 
