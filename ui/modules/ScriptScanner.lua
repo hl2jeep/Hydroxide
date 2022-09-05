@@ -144,6 +144,7 @@ local function createConstant(index, value)
     elseif valueType == "table" then
         if #value==0 then
             information.Label.Text="Empty Table"
+            information.Label.TextColor3 = oh.Constants.Syntax["unnamed_function"]
         else
             information.Label.Text="Table"
         end
