@@ -33,19 +33,13 @@ local InfoEnvironment = InfoSections.Environment
 local InfoProtos = InfoSections.Protos
 local InfoConstants = InfoSections.Constants
 
-local EnvironmentQuery = InfoEnvironment.Query
 local EnvironmentResultsClip = InfoEnvironment.Results.Clip
-local EnvironmentResultsStatus = EnvironmentResultsClip.ResultStatus
 local EnvironmentResults = EnvironmentResultsClip.Content
 
-local ConstantsQuery = InfoConstants.Query
 local ConstantsResultsClip = InfoConstants.Results.Clip
-local ConstantsResultsStatus = ConstantsResultsClip.ResultStatus
 local ConstantsResults = ConstantsResultsClip.Content
 
-local ProtosQuery = InfoProtos.Query
 local ProtosResultsClip = InfoProtos.Results.Clip
-local ProtosResultsStatus = ProtosResultsClip.ResultStatus
 local ProtosResults = ProtosResultsClip.Content
 
 local scriptList = List.new(ListResults)
@@ -80,24 +74,15 @@ scriptList:BindContextMenu(ContextMenu.new({ pathContext }))
 pathContext:SetCallback(function()
     local selectedInstance = selected.logContext.LocalScript.Instance
 
-    setClipboard(getInstancePath(selectedInstance))
+    setClipboard(dataToString(selectedInstance))
     MessageBox.Show("Success", ("%s's path was copied to your clipboard."):format(selectedInstance.Name), MessageType.OK)
 end)
 
 copyEnvContext:SetCallback(function()
     local selectedEnv=selected.selectedEnv
-    local val=selectedEnv.value
-
+    local val=selected.selectedEnv.value
     if val then
-        local valType=type(val)
-        if valType=="userdata" then
-            val=(typeof(val)=="Instance" and getInstancePath(val) or userdataValue(val))
-        elseif valType=="table" then
-            val=tableToString(val)
-        else
-            val=toString(val)
-        end
-        setClipboard(val)
+        setClipboard(dataToString(val))
     end
 
     MessageBox.Show("Success", ("%s's value was copied to your clipboard."):format(selectedEnv.index), MessageType.OK)
@@ -112,7 +97,7 @@ end)
 
 copyProtoInfoContext:SetCallback(function()
     if selected.selectedProto then
-        setClipboard(tableToString(getInfo(selected.selectedProto.value)))
+        setClipboard(dataToString(getInfo(selected.selectedProto.value)))
         MessageBox.Show("Success", ("A table with %s's information was copied to your clipboard."):format(
             (selected.selectedProto.name=="" and "the unnamed function" or selected.selectedProto.name)
         ), MessageType.OK)
@@ -121,16 +106,7 @@ end)
 
 copyConstantValue:SetCallback(function()
     if selected.selectedConstant then
-        local toCopy=selected.selectedConstant.value
-        local vType=type(toCopy)
-        if vType=="userdata" then
-            toCopy=(typeof(toCopy)=="Instance" and getInstancePath(toCopy) or userdataValue(toCopy))
-        elseif vType=="table" then
-            toCopy=tableToString(toCopy)
-        else
-            toCopy=toString(toCopy)
-        end
-        setClipboard(toCopy)
+        setClipboard(dataToString(selected.selectedConstant.value))
         MessageBox.Show("Success", ("The value of the constant %d was copied to your clipboard."):format(selected.selectedConstant.index), MessageType.OK)
     end
 end)
