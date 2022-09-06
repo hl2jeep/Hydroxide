@@ -154,7 +154,7 @@ local function createConstant(index, value, Instance)
 
         if functionName == '' then
             functionName = "Unnamed function"
-            information.Label.TextColor3 = oh.Constants.Syntax["unnamed_function"]
+            information.Label.TextColor3 = oh.Constants.Syntax["unnamed_constant"]
         end
         
         information.Label.Text = functionName
@@ -163,7 +163,7 @@ local function createConstant(index, value, Instance)
     elseif valueType == "table" then
         if #value==0 then
             information.Label.Text="Empty Table"
-            information.Label.TextColor3 = oh.Constants.Syntax["unnamed_function"]
+            information.Label.TextColor3 = oh.Constants.Syntax["empty_table"]
         else
             information.Label.Text="Table"
         end
@@ -194,7 +194,7 @@ local function createEnvironment(index, value, tbpos, Instance)
     information.Label.Position = UDim2.new(0, indexWidth + 20, 0, 0)
     information.Label.Text = (toString(index)=="" and "Empty String" or toString(index))
     if toString(index)=="" then
-        information.Label.TextColor3=oh.Constants.Syntax["unnamed_function"]
+        information.Label.TextColor3=oh.Constants.Syntax["unnamed_env"]
     end
 
     ListButton.new(instance, environmentList):SetRightCallback(function()
