@@ -259,7 +259,7 @@ if readFile and writeFile then
             return unpack(assets)
         end
 
-        writeFile("version.oh", releaseInfo.tag_name)
+        writeFile("version.oh", (releaseInfo and releaseInfo.tag_name or "Unknown"))
     elseif ran and releaseInfo.tag_name == result then
         function environment.import(asset)
             if importCache[asset] then
@@ -294,9 +294,21 @@ if readFile and writeFile then
     useMethods({ import = environment.import })
 end
 
-useMethods(import("methods/string"))
-useMethods(import("methods/table"))
-useMethods(import("methods/userdata"))
+xpcall(function()
+    useMethods(import("methods/string"))
+    useMethods(import("methods/table"))
+    useMethods(import("methods/userdata"))
+end, function(e)
+    warn("There was an issue while loading the methods")
+    warn("Please report this to spongus#7609")
+    warn(tostring(e))
+    task.wait(.5)
+    if keypress and keyrelease then
+        keypress(0x78)
+        task.wait()
+        keyrelease(0x78)
+    end
+end)
 -- Doesnt seem to be used anywhere in hydroxide
 -- useMethods(import("methods/environment"))
 
