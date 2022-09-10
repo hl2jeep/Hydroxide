@@ -7,7 +7,9 @@ function ModuleScript.new(instance)
     moduleScript.Instance = instance
     moduleScript.Constants = getConstants(closure)
     moduleScript.Protos = getProtos(closure)
-    --moduleScript.ReturnValue = require(instance) // causes detection
+    moduleScript.returnValue=function()
+        return require(instance)
+    end
 
     return moduleScript
 end
