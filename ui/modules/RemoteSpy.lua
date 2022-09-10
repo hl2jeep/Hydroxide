@@ -291,7 +291,7 @@ function Log.new(remote)
     button.Label.Text = remoteInstanceName
     button.Icon.Image = icons[remoteClassName]
 
-    local function viewLogs()
+    local function viewLogs(crashProtection)
         if selected.remoteLog then
             remoteLogs:Clear()
         end
@@ -302,7 +302,7 @@ function Log.new(remote)
 
         for _i, call in pairs(remote.Logs) do
             ArgsLog.new(log, call)
-            if #remote.Logs > 400 then
+            if crashProtection then
                 task.wait(#remote.Logs/20000) -- Will probably prevent crashing
             end
         end
@@ -318,13 +318,17 @@ function Log.new(remote)
         remoteLogs:Recalculate()
     end
 
+    local function crashProtection()
+        viewLogs(true)
+    end
+
     listButton:SetCallback(function()
         if selected.remoteLog ~= log then
             if #remote.Logs > 400 then
-                MessageBox.Show("Warning",
-                    "This remote seems to have a lot of calls, opening this may cause your game to freeze for a few seconds.\n\nContinue?",
+                MessageBox.Show("Question",
+                    "This remote seems to have "..#remote.Logs.." calls, which might crash your game, so would you want to enable the crash protection?",
                     MessageType.YesNo,
-                    viewLogs)
+                    crashProtection, viewLogs)
             else
                 viewLogs()
             end
