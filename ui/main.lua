@@ -109,6 +109,18 @@ else
 	Interface.Parent = CoreGui
 end
 
-import("ui/modify")(Interface)
+xpcall(function()
+	import("ui/modify")(Interface)
+end, function(e)
+	warn("There was an issue while modifying the UI")
+    warn("Please report this to spongus#7609")
+    warn(tostring(e))
+    task.wait(.5)
+    if keypress and keyrelease then
+        keypress(0x78)
+        task.wait()
+        keyrelease(0x78)
+    end
+end)
 
 return Interface
