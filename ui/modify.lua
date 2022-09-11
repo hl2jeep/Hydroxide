@@ -26,5 +26,10 @@ function modify(Interface)
         }
         slogan.Text=random[math.random(1,#random)]
     end
+    do -- Fix an issue where the Protos button would always look like its selected
+        local label: TextLabel=Interface.Base.Body.Pages.ScriptScanner.Info.Options.Clip.Content.Protos.Label
+        label.TextTransparency=0
+        label.TextColor3=Color3.fromRGB(200,200,200)
+    end
 end
 return modify
