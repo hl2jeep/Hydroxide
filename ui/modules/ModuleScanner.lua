@@ -22,13 +22,21 @@ local moduleLogs = {}
 local selectedLog
 
 local pathContext = ContextMenuButton.new("rbxassetid://4891705738", "Get Module Path")
-moduleList:BindContextMenu(ContextMenu.new({ pathContext }))
+local returnContext = ContextMenuButton.new("rbxassetid://4891705738", "Get Return Value")
+moduleList:BindContextMenu(ContextMenu.new({ pathContext, returnContext }))
 
 pathContext:SetCallback(function()
     local selectedInstance = selectedLog.ModuleScript.Instance
 
     setClipboard(getInstancePath(selectedInstance))
     MessageBox.Show("Success", ("%s's path was copied to your clipboard."):format(selectedInstance.Name), MessageType.OK)
+end)
+
+returnContext:SetCallback(function()
+    local function getReturn()
+        setClipboard(dataToString(selectedLog.ModuleScript.returnValue()))
+    end
+    MessageBox.Show("Warning", "Copying the return value of this module MIGHT get you detected\n\nContinue?", MessageType.YesNo, getReturn)
 end)
 
 -- Log Object
