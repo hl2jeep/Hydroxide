@@ -8,7 +8,11 @@ function LocalScript.new(instance)
     localScript.Environment = getSenv(instance)
     localScript.Constants = getConstants(closure)
     localScript.Protos = getProtos(closure)
-    localScript.Source = decompileScript(instance)
+    xpcall(function()
+        localScript.Source = decompileScript(instance)
+    end, function()
+        localScript.Source = "There was an issue while decompiling."
+    end)
     
     return localScript
 end
