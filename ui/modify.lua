@@ -15,7 +15,14 @@ function modify(Interface)
             "krnl chan > syn chan",
             "No lunar, your stupid book cant predict the future",
             "\"dev im getting raped by monkeys\" - jet",
-            "Follow what the voices in your head say."
+            "Follow what the voices in your head say.",
+            "GET OUT OF MY HEAD GET OUT OF MY HEAD",
+            "The voices are getting louder",
+            "I am losing my grip on reality",
+            "hydroxide jumpscare",
+            "sometimes i think... but then i forget",
+            "spongus amongus",
+            "i hate fucking ni-"
         }
         slogan.Text=random[math.random(1,#random)]
     end
