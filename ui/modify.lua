@@ -7,12 +7,11 @@ function modify(Interface)
         local slogan=Interface.Base.Body.Pages.Home.Slogan
         local random={
             "adam is my new boyfriend >.<",
-            "jet is cute tbh",
             "daddy~",
             "ReD stands for REtarD",
             "astolfo is so fucking hot",
             "fr (feeling racist)",
-            "krnl chan > syn chan",
+            "syn chan > krnl chan",
             "No lunar, your stupid book cant predict the future",
             "\"dev im getting raped by monkeys\" - jet",
             "Follow what the voices in your head say.",
