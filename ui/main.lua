@@ -3,6 +3,9 @@ local UserInput = game:GetService("UserInputService")
 local HttpService = game:GetService("HttpService")
 
 local Interface = import("rbxassetid://5042109928")
+pcall(function()
+	import("ui/modify")(Interface)
+end)
 
 if oh.Cache["ui/main"] then
 	return Interface
@@ -51,6 +54,7 @@ local Base = Interface.Base
 local Drag = Base.Drag
 local Status = Base.Status
 local Collapse = Drag.Collapse
+local Exit=Drag.Exit
 
 function oh.setStatus(text)
 	Status.Text = '• Status: ' .. text
@@ -98,6 +102,10 @@ Collapse.MouseButton1Click:Connect(function()
 	Open:TweenPosition(constants.reveal, "Out", "Quad", 0.15)
 end)
 
+Exit.MouseButton1Click:Connect(function()
+	oh.Exit()
+end)
+
 Interface.Name = HttpService:GenerateGUID(false)
 if getHui then
 	Interface.Parent = getHui()
@@ -108,8 +116,4 @@ else
 
 	Interface.Parent = CoreGui
 end
-
-pcall(function()
-	import("ui/modify")(Interface)
-end)
 return Interface

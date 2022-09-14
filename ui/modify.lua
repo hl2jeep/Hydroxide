@@ -37,5 +37,10 @@ function modify(Interface)
         local info=import("rbxassetid://10896419712")
         info.Parent=Interface.Base.Body.Pages.ModuleScanner
     end
+    do -- Add Exit Button
+        Interface.Base.Body.Drag.Collapse.Name="Exit"
+        local a=import("rbxassetid://10907767459")
+        a.Parent=Interface.Base.Body.Drag
+    end
 end
 return modify
