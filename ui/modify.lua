@@ -25,10 +25,17 @@ function modify(Interface)
         }
         slogan.Text=random[math.random(1,#random)]
     end
-    do -- Fix an issue where the Protos button would always look like its selected
-        local label: TextLabel=Interface.Base.Body.Pages.ScriptScanner.Info.Options.Clip.Content.Protos.Label
-        label.TextTransparency=0
+    do -- Change selected tab
+        local label=Interface.Base.Body.Pages.ScriptScanner.Info.Options.Clip.Content.Protos.Label
+        label.TextTransparency=0.2
         label.TextColor3=Color3.fromRGB(200,200,200)
+
+        Interface.Base.Body.Pages.ScriptScanner.Info.Sections.Protos.Visible=false;
+        Interface.Base.Body.Pages.ScriptScanner.Info.Sections.Source.Visible=true;
+    end
+    do -- Add ModuleScanner info tab
+        local info=import("rbxassetid://10896419712")
+        info.Parent=Interface.Base.Body.Pages.ModuleScanner
     end
 end
 return modify

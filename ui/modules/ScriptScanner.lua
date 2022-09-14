@@ -178,7 +178,7 @@ local function createConstant(index, value, Instance)
 end
 
 local function createEnvironment(index, value, tbpos, Instance)
-    local instance = Assets.ConstantPod:Clone() -- For now, both will have the same icon
+    local instance = Assets.ConstantPod:Clone()
     local information = instance.Information
     local indexWidth = TextService:GetTextSize(tbpos, 18, "SourceSans", constants.textWidth).X + 8    
 
@@ -296,8 +296,8 @@ InfoBack.MouseButton1Click:Connect(function()
     ScriptList.Visible = true
 end)
 
-local selectedSection = InfoProtos
-local selectedSectionButton = InfoOptions.Protos
+local selectedSection = InfoSource
+local selectedSectionButton = InfoOptions.Source
 local animationCache = {}
 
 for _i, sectionButton in pairs(InfoOptions:GetChildren()) do
