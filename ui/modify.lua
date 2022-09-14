@@ -42,5 +42,24 @@ function modify(Interface)
         local a=import("rbxassetid://10907767459")
         a.Parent=Interface.Base.Body.Drag
     end
+    do -- RGB (Suggested by Dylann)
+        if (isfile and isfile("rgb.oh")) then
+            local rgbObjects={Interface.Open.Border, Interface.Base.Border}
+            table.foreach(rgbObjects, function(_, o: ImageLabel)
+                coroutine.create(function()
+                    local x=0 
+                    local y=1/255
+                    while true do
+                        o.ImageColor3=Color3.fromHSV(x,1,1)
+                        x+=y
+                        if x>=1 then
+                            x=0
+                        end
+                        task.wait()
+                    end
+                end)
+            end)
+        end
+    end
 end
 return modify
