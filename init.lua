@@ -89,9 +89,6 @@ local globalMethods = {
 		if not decompile or (identifyexecutor and identifyexecutor() == "ScriptWare") then
 			return "This exploit has no decompiler."
 		end
-		if identifyexecutor and identifyexecutor() == "Krnl" then
-			return "Krnl has issues with decompiling\nSo for now no decompiling for KRNL users"
-		end
 		return tostring(decompile(script))
 	end,
 }
