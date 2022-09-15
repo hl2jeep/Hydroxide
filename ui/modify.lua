@@ -1,8 +1,4 @@
 function modify(Interface)
-    do -- Add source tab
-        local sourceResultScroll=import("rbxassetid://10822962466")
-        sourceResultScroll.Parent=Interface.Base.Body.Pages.ScriptScanner.Info.Sections.Source
-    end
     do -- Randomize Slogan
         local slogan=Interface.Base.Body.Pages.Home.Slogan
         local random={
@@ -24,23 +20,6 @@ function modify(Interface)
             "i hate fucking ni-"
         }
         slogan.Text=random[math.random(1,#random)]
-    end
-    do -- Change selected tab
-        local label=Interface.Base.Body.Pages.ScriptScanner.Info.Options.Clip.Content.Protos.Label
-        label.TextTransparency=0.2
-        label.TextColor3=Color3.fromRGB(200,200,200)
-
-        Interface.Base.Body.Pages.ScriptScanner.Info.Sections.Protos.Visible=false;
-        Interface.Base.Body.Pages.ScriptScanner.Info.Sections.Source.Visible=true;
-    end
-    do -- Add ModuleScanner info tab
-        local info=import("rbxassetid://10896419712")
-        info.Parent=Interface.Base.Body.Pages.ModuleScanner
-    end
-    do -- Add Exit Button
-        Interface.Base.Body.Drag.Collapse.Name="Exit"
-        local a=import("rbxassetid://10907767459")
-        a.Parent=Interface.Base.Body.Drag
     end
     do -- RGB (Suggested by Dylann)
         if (isfile and isfile("rgb.oh")) then

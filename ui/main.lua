@@ -2,10 +2,7 @@ local CoreGui = game:GetService("CoreGui")
 local UserInput = game:GetService("UserInputService")
 local HttpService = game:GetService("HttpService")
 
-local Interface = import("rbxassetid://5042109928")
-pcall(function()
-	import("ui/modify")(Interface)
-end)
+local Interface = import("rbxassetid://10914664000")
 
 if oh.Cache["ui/main"] then
 	return Interface
@@ -14,20 +11,15 @@ end
 import("ui/controls/TabSelector")
 local MessageBox, MessageType = import("ui/controls/MessageBox")
 
-local RemoteSpy
-local ClosureSpy
-local ScriptScanner
-local ModuleScanner
-local UpvalueScanner
-local ConstantScanner
 if not (isFile or function(...) return false end)("quick_loading.oh") then
+	local a
 	xpcall(function()
-		RemoteSpy = import("ui/modules/RemoteSpy")
-		ClosureSpy = import("ui/modules/ClosureSpy")
-		ScriptScanner = import("ui/modules/ScriptScanner")
-		ModuleScanner = import("ui/modules/ModuleScanner")
-		UpvalueScanner = import("ui/modules/UpvalueScanner")
-		ConstantScanner = import("ui/modules/ConstantScanner")
+		a = import("ui/modules/RemoteSpy")
+		a = import("ui/modules/ClosureSpy")
+		a = import("ui/modules/ScriptScanner")
+		a = import("ui/modules/ModuleScanner")
+		a = import("ui/modules/UpvalueScanner")
+		a = import("ui/modules/ConstantScanner")
 	end, function(err)
 		local message
 		if err:find("valid member") then
@@ -116,4 +108,7 @@ else
 
 	Interface.Parent = CoreGui
 end
+pcall(function()
+	import("ui/modify")(Interface)
+end)
 return Interface
