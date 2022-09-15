@@ -5,7 +5,9 @@ function LocalScript.new(instance)
     local closure = getScriptClosure(instance)
 
     localScript.Instance = instance
-    localScript.Environment = getSenv(instance)
+    xpcall(function()
+        localScript.Environment = getSenv(instance)
+    end, function() localScript.Environment={} end)
     localScript.Constants = getConstants(closure)
     localScript.Protos = getProtos(closure)
     xpcall(function()

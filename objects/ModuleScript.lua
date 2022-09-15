@@ -7,7 +7,9 @@ function ModuleScript.new(instance)
     moduleScript.Instance = instance
     moduleScript.Constants = getConstants(closure)
     moduleScript.Protos = getProtos(closure)
-    moduleScript.Environment = getSenv(instance)
+    xpcall(function()
+        moduleScript.Environment = getSenv(instance)
+    end, function() moduleScript.Environment={} end)
     moduleScript.returnValue=function()
         return require(instance)
     end
