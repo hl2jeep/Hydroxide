@@ -236,6 +236,9 @@ function Log.new(moduleScript)
             end
 
             InfoSource.ResultScroll.ResultStatus.Text=moduleScript.Source
+            if not ((isfile or function(...) return false end)("disable_return_value.oh")) then
+                Info.Sections.ReturnValue.ResultScroll.ResultStatus.Text=dataToString(moduleScript.getReturnValue())
+            end
 
             selectedLog = log
         end
