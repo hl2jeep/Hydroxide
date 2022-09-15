@@ -19,6 +19,10 @@ function ModuleScript.new(instance)
         moduleScript.Source = "There was an issue while decompiling."
     end)
 
+    moduleScript.getReturnValue=function()
+        return require(instance)
+    end
+
     return moduleScript
 end
 
