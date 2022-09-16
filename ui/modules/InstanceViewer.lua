@@ -21,10 +21,14 @@ local ServiceList = List.new(ResultContent.Content)
 local docsContext=ContextMenuButton.new("rbxassetid://4891705738", "Copy Documentation URL")
 ServiceList:BindContextMenu(ContextMenu.new({ docsContext }))
 
+docsContext:SetCallback(function()
+    setClipboard("https://developer.roblox.com/en-us/api-reference/class/"..selected.instance.Instance.ClassName)
+    MessageBox.Show("Success", ("%s's documentation URL was copied to your clipboard."):format(selected.instance.Instance.Name), MessageType.OK)
+end)
+
 -- Log Object
 local Log={}
 function Log.new(instance)
-    local log={}
     local originalInstance=instance.Instance
     local instanceName=originalInstance.Name
     local button = Assets.ServiceLog:Clone()
