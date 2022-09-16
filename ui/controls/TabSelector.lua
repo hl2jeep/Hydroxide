@@ -2,7 +2,7 @@ local TweenService = game:GetService("TweenService")
 
 local TabSelector = {}
 
-local Base = import("rbxassetid://10921522915").Base
+local Base = import("rbxassetid://10922275113").Base
 local Tabs = Base.Tabs.Container
 local Pages = Base.Body.Pages
 
@@ -14,7 +14,8 @@ local requiredMethods = {
     ScriptScanner = import("modules/ScriptScanner").RequiredMethods,
     ModuleScanner = import("modules/ModuleScanner").RequiredMethods,
     ClosureSpy = import("modules/ClosureSpy").RequiredMethods,
-    RemoteSpy = import("modules/RemoteSpy").RequiredMethods
+    RemoteSpy = import("modules/RemoteSpy").RequiredMethods,
+    InstanceViewer = import("modules/InstanceViewer").RequiredMethods
 }
 
 local constants = {

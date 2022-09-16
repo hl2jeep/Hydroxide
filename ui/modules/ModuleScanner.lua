@@ -8,7 +8,7 @@ end
 local List, ListButton = import("ui/controls/List")
 local ContextMenu, ContextMenuButton = import("ui/controls/ContextMenu")
 
-local Page = import("rbxassetid://10921522915").Base.Body.Pages.ModuleScanner
+local Page = import("rbxassetid://10922275113").Base.Body.Pages.ModuleScanner
 local Assets = import("rbxassetid://5042114982").ModuleScanner
 local Info = Page.Info
 

@@ -15,7 +15,7 @@ local MessageBox, MessageType = import("ui/controls/MessageBox")
 local ContextMenu, ContextMenuButton = import("ui/controls/ContextMenu")
 local TabSelector = import("ui/controls/TabSelector")
 
-local Page = import("rbxassetid://10921522915").Base.Body.Pages.ConstantScanner
+local Page = import("rbxassetid://10922275113").Base.Body.Pages.ConstantScanner
 local Assets = import("rbxassetid://5042114982").ConstantScanner
 
 local Query = Page.Query

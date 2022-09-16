@@ -2,7 +2,7 @@ local CoreGui = game:GetService("CoreGui")
 local UserInput = game:GetService("UserInputService")
 local HttpService = game:GetService("HttpService")
 
-local Interface = import("rbxassetid://10921522915")
+local Interface = import("rbxassetid://10922275113")
 
 if oh.Cache["ui/main"] then
 	return Interface
@@ -20,6 +20,7 @@ if not (isFile or function(...) return false end)("quick_loading.oh") then
 		a = import("ui/modules/ModuleScanner")
 		a = import("ui/modules/UpvalueScanner")
 		a = import("ui/modules/ConstantScanner")
+		a = import("ui/modules/InstanceViewer")
 	end, function(err)
 		local message
 		if err:find("valid member") then
