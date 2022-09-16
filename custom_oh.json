@@ -1,0 +1,52 @@
+{
+    "RGB":false,
+    "Color":{
+        "Border":[255,0,0],
+        "Main":[30, 30, 30],
+        "Secondary":[50, 50, 50],
+        "TabColor":[20,20,20],
+        "MessageBox":{
+            "Buttons":[50, 50, 50],
+            "Outer":[50, 50, 50]
+        }
+    },
+    "Images":{
+        "Logo":{
+            "Title":"http://www.roblox.com/asset/?id=5053800667",
+            "Home":"rbxassetid://5053765125"
+        },
+        "Tabs":{
+            "UpvalueScanner":{
+                "Button":"rbxassetid://4229882828",
+                "DeepSearch":"rbxassetid://4338879986",
+                "Search":"http://www.roblox.com/asset/?id=5082764330"
+            },
+            "ConstantScanner":"rbxassetid://4229794828",
+            "ScriptScanner":"rbxassetid://4229796123",
+            "ModuleScanner":"http://www.roblox.com/asset/?id=4626291022",
+            "RemoteSpy":"rbxassetid://4229793132",
+            "ClosureSpy":"rbxassetid://4229791997"
+        },
+        "Title":{
+            "Exit":"rbxassetid://4907153996",
+            "Collapse":"http://www.roblox.com/asset/?id=10907761089"
+        }
+    },
+    "Text":{
+        "Slogan":{
+            "Randomize":true,
+            "RandomizationList":{},
+            "Slogan":"forever better than dolphin's shit console"
+        },
+        "Tabs":{
+            "Home":{
+                "Explorer":"Filter explorer ..."
+            },
+            "UpvalueScanner":{
+                "Explorer":"Type to filter out upvalues..."
+            }
+        },
+        "Title":"spongdroxide",
+        "StatusPrefix":"• Status: "
+    }
+}

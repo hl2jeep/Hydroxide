@@ -11,7 +11,7 @@ webImport("init")
 webImport("ui/main")
 ```
 
-# Hydroxide
+# spongdroxide (Hydroxide)
 <i>General purpose pen-testing tool for games on the Roblox engine</i>
 
 Report issues to spongus's DMs (spongus#7609)

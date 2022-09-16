@@ -21,23 +21,26 @@ function modify(Interface)
         }
         slogan.Text=random[math.random(1,#random)]
     end
-    do -- RGB (Suggested by Dylann)
-        if (isfile and isfile("rgb.oh")) then
-            local rgbObjects={Interface.Open.Border, Interface.Base.Border}
-            table.foreach(rgbObjects, function(_, o: ImageLabel)
-                coroutine.create(function()
-                    local x=0 
-                    local y=1/255
-                    while true do
-                        o.ImageColor3=Color3.fromHSV(x,1,1)
-                        x+=y
-                        if x>=1 then
-                            x=0
+    do -- Customizable Hydroxide
+        if (isfile and isfile("custom_oh.json")) then
+            local CustomOH=game:GetService("HttpService"):JSONDecode((readfile or function(...)return""end)("custom_oh.json"))
+            if (CustomOH.RGB and CustomOH.RGB==true) then
+                local rgbObjects={Interface.Open.Border, Interface.Base.Border, Interface.Base.MessageBox.Border}
+                table.foreach(rgbObjects, function(_, o: ImageLabel)
+                    coroutine.create(function()
+                        local x=0 
+                        local y=1/255
+                        while true do
+                            o.ImageColor3=Color3.fromHSV(x,1,1)
+                            x+=y
+                            if x>=1 then
+                                x=0
+                            end
+                            task.wait()
                         end
-                        task.wait()
-                    end
+                    end)
                 end)
-            end)
+            end
         end
     end
 end
