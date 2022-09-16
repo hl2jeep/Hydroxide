@@ -7,6 +7,7 @@ function instance.new(instance)
     newInstance.Path = instance:GetFullName()
     newInstance.Descendants = instance:GetDescendants()
     newInstance.Children = instance:GetChildren()
+    newInstance.IsService = (instance.Parent==game)
     newInstance.Properties={}
     newInstance.FillProperties=function() -- Prevent slow loading
         local api=game:GetService("HttpService"):JSONDecode(game:HttpGet("https://anaminus.github.io/rbx/json/api/latest.json"))
