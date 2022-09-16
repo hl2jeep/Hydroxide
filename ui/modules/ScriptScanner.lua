@@ -13,7 +13,7 @@ local MessageBox, MessageType = import("ui/controls/MessageBox")
 local ContextMenu, ContextMenuButton = import("ui/controls/ContextMenu")
 
 local Page = import("rbxassetid://10922275113").Base.Body.Pages.ScriptScanner
-local Assets = import("rbxassetid://5042114982").ScriptScanner
+local Assets = import("rbxassetid://10924729710").ScriptScanner
 
 local ScriptList = Page.List
 local ScriptInfo = Page.Info
@@ -178,7 +178,7 @@ local function createConstant(index, value, Instance)
 end
 
 local function createEnvironment(index, value, tbpos, Instance)
-    local instance = Assets.ConstantPod:Clone()
+    local instance = Assets.EnvironmentPod:Clone()
     local information = instance.Information
     local indexWidth = TextService:GetTextSize(tbpos, 18, "SourceSans", constants.textWidth).X + 8    
 

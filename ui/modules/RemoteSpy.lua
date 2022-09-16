@@ -19,7 +19,7 @@ local ContextMenu, ContextMenuButton = import("ui/controls/ContextMenu")
 local TabSelector = import("ui/controls/TabSelector")
 
 local Base = import("rbxassetid://10922275113").Base
-local Assets = import("rbxassetid://5042114982").RemoteSpy
+local Assets = import("rbxassetid://10924729710").RemoteSpy
 
 local Prompts = Base.Prompts
 local Page = Base.Body.Pages.RemoteSpy
