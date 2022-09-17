@@ -36,7 +36,7 @@ function Log.new(instance)
 
     button.Name = instanceName
     button:FindFirstChild("Name").Text = originalInstance.ClassName
-    button.Methods.Text = #Methods.getInstanceMethods(originalInstance)
+    button.Methods.Text = #Methods.GetInstanceMethods(originalInstance)
     button.Descendants.Text = #instance.Descendants
     Methods.SetToInstanceIcon(button.Icon, originalInstance)
 

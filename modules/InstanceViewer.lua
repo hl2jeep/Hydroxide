@@ -339,4 +339,6 @@ InstanceViewer.InstanceIcons=InstanceIcons
 InstanceViewer.Icon=Icon
 InstanceViewer.SetToInstanceIcon=setToInstanceIcon
 InstanceViewer.Scan=scan
+InstanceViewer.GetInstanceMethods = getInstanceMethods
+InstanceViewer.GetInstanceProperties = getInstanceProperties
 return InstanceViewer
