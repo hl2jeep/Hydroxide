@@ -17,7 +17,8 @@ local function scan(query)
     for _i, v in pairs(game:GetChildren()) do
 		if typeof(v)=="Instance" and
 			not services[v] and
-			v.Name:lower():find(query)
+			v.Name:lower():find(query) 
+		then
 			services[v]=InstanceObj.new(v)
 		end
     end
