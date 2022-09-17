@@ -912,7 +912,7 @@ scriptContext:SetCallback(function()
             end
         end
 
-        setClipboard(script .. '\n' .. remotePath .. ':' .. method .. '(' .. args:sub(1, -3) .. ')')
+        setClipboard((script~="" and "\n" or "") .. remotePath .. ':' .. method .. '(' .. args:sub(1, -3) .. ')')
     end
 
     task.wait(0.25)
