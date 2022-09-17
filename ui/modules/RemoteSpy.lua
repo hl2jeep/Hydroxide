@@ -890,13 +890,12 @@ scriptContext:SetCallback(function()
             local v = selectedArgs[i]
             local valueType = type(v)
             local robloxValueType = typeof(v)
-            local variableName = robloxValueType:sub(1, 1):upper() .. robloxValueType:sub(2)
 
             if valueType == "userdata" or valueType == "vector" then
                 v = (typeof(v) == "Instance" and getInstancePath(v)) or userdataValue(v)
             elseif valueType == "table" then
                 v = tableToString(v)
-                script = script .. ("local oh%s%d = %s\n"):format(variableName, i, v) 
+                script = script .. ("local ohTable%d = %s\n"):format(i, v) 
             elseif valueType == "string" then
                 v = dataToString(v)
             elseif valueType == "function" then
@@ -906,7 +905,7 @@ scriptContext:SetCallback(function()
             end
 
             if valueType=="table" then
-                args = args .. ("oh%s%d, "):format(variableName, i)
+                args = args .. ("ohTable%d, "):format(i)
             else
                 args = args..v..", "
             end
