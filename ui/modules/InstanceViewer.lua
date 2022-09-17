@@ -31,15 +31,14 @@ local Log={}
 function Log.new(instance)
     local originalInstance=instance.Instance
     local instanceName=originalInstance.Name
-    print("addService "..instanceName)
     local button = Assets.ServiceLog:Clone()
     local listButton = ListButton.new(button, ServiceList)
 
     button.Name = instanceName
-    button:FindFirstChild("Name").Text = instanceName
-    button.Children.Text = #instance.Children
+    button:FindFirstChild("Name").Text = originalInstance.ClassName
+    button.Methods.Text = #Methods.getInstanceMethods(originalInstance)
     button.Descendants.Text = #instance.Descendants
-    --Methods.SetToInstanceIcon(button.Icon, originalInstance)
+    Methods.SetToInstanceIcon(button.Icon, originalInstance)
 
     listButton:SetRightCallback(function()
         selected.instance=instance

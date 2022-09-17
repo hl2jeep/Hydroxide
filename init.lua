@@ -91,6 +91,7 @@ local globalMethods = {
 		end
 		return tostring(decompile(script))
 	end,
+	getHiddenProperty=gethiddenproperty or get_hidden_property or get_hidden_prop
 }
 
 if PROTOSMASHER_LOADED then
