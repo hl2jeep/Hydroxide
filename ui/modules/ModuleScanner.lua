@@ -52,6 +52,7 @@ function Log.new(moduleScript)
     listButton:SetCallback(function()
         if selectedLog ~= log then
             InfoList.Visible=false
+            Info.Visible=true
 
             local nameLength = game:GetService("TextService"):GetTextSize(moduleName, 18, "SourceSans", constants.textWidth).X + 20
             

@@ -31,6 +31,7 @@ local Log={}
 function Log.new(instance)
     local originalInstance=instance.Instance
     local instanceName=originalInstance.Name
+    print("addService "..instanceName)
     local button = Assets.ServiceLog:Clone()
     local listButton = ListButton.new(button, ServiceList)
 
@@ -38,7 +39,7 @@ function Log.new(instance)
     button:FindFirstChild("Name").Text = instanceName
     button.Children.Text = #instance.Children
     button.Descendants.Text = #instance.Descendants
-    Methods.SetToInstanceIcon(button.Icon, originalInstance)
+    --Methods.SetToInstanceIcon(button.Icon, originalInstance)
 
     listButton:SetRightCallback(function()
         selected.instance=instance
@@ -50,8 +51,8 @@ end
 local function addServices(query)
     ServiceList:Clear()
 
-    for _instance, localScript in pairs(Methods.Scan(query)) do
-        Log.new(localScript)
+    for _instance, service in pairs(Methods.Scan(query)) do
+        Log.new(service)
     end
 
     ServiceList:Recalculate()
