@@ -38,6 +38,7 @@ function Log.new(instance)
     button:FindFirstChild("Name").Text = instanceName
     button.Children.Text = #instance.Children
     button.Descendants.Text = #instance.Descendants
+    Methods.SetToInstanceIcon(button.Icon, originalInstance)
 
     listButton:SetRightCallback(function()
         selected.instance=instance
