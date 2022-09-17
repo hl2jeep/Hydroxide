@@ -315,7 +315,6 @@ for _i, sectionButton in pairs(InfoOptions:GetChildren()) do
             
             selectedSection = section
             selectedSectionButton = sectionButton
-
         end)
 
         sectionButton.MouseEnter:Connect(function()
