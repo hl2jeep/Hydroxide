@@ -49,9 +49,6 @@ local environmentList = List.new(EnvironmentResults)
 
 local scriptLogs = {}
 local selected = {}
-local icons = {
-    LocalScript = "rbxassetid://4800244808"
-}
 
 local constants = {
     fadeLength = TweenInfo.new(0.15),
@@ -62,8 +59,9 @@ local pathContext = ContextMenuButton.new("rbxassetid://4891705738", "Get Script
 
 local copyEnvContext = ContextMenuButton.new("rbxassetid://4891705738", "Copy Env Value")
 local copyProtoNameContext = ContextMenuButton.new("rbxassetid://4891705738", "Copy Proto Name")
-local copyProtoInfoContext = ContextMenuButton.new("rbxassetid://4891705738", "Copy Proto Info")
+local copyProtoInfoContext = ContextMenuButton.new(oh.Constants.Types.table, "Copy Proto Info")
 local copyConstantValue = ContextMenuButton.new("rbxassetid://4891705738", "Copy Constant Value")
+local copyEnvDataTypeContext = ContextMenuButton.new(oh.Constants.Types.userdata, "Copy Env Value Data Type")
 
 environmentList:BindContextMenu(ContextMenu.new({ copyEnvContext }))
 protosList:BindContextMenu(ContextMenu.new({ copyProtoNameContext, copyProtoInfoContext }))
@@ -80,12 +78,24 @@ end)
 
 copyEnvContext:SetCallback(function()
     local selectedEnv=selected.selectedEnv
-    local val=selected.selectedEnv.value
+    local val=selectedEnv.value
     if val then
         setClipboard(dataToString(val))
     end
 
     MessageBox.Show("Success", ("%s's value was copied to your clipboard."):format(selectedEnv.index), MessageType.OK)
+end)
+
+copyEnvDataTypeContext:SetCallback(function()
+    local selectedEnv=selected.selectedEnv
+    local val=selectedEnv.value
+    if val then
+        setClipboard(userdataValue(val))
+    end
+    MessageBox.Show("Success", 
+        ("%s's value data type was copied to your clipboard."):format(selectedEnv.index),
+        MessageType.OK
+    )
 end)
 
 copyProtoNameContext:SetCallback(function()
@@ -149,27 +159,7 @@ local function createConstant(index, value, Instance)
     information.Icon.Position = UDim2.new(0, indexWidth, 0, 2)
     information.Label.Position = UDim2.new(0, indexWidth + 20, 0, 0)
 
-    if valueType == "function" then
-        local functionName = getInfo(value).name or ''
-
-        if functionName == '' then
-            functionName = "Unnamed function"
-            information.Label.TextColor3 = oh.Constants.Syntax["unnamed_constant"]
-        end
-        
-        information.Label.Text = functionName
-    elseif valueType == "userdata" then
-        information.Label.Text=(typeof(value)=="Instance" and getInstancePath(value) or userdataValue(value))
-    elseif valueType == "table" then
-        if #value==0 then
-            information.Label.Text="Empty Table"
-            information.Label.TextColor3 = oh.Constants.Syntax["empty_table"]
-        else
-            information.Label.Text="Table"
-        end
-    else
-        information.Label.Text = toString(value)
-    end
+    information.Label.Text = value
     
     ListButton.new(instance, constantsList):SetRightCallback(function()
         selected.selectedConstant={index=index, value=value, Instance=Instance}
@@ -182,7 +172,7 @@ local function createEnvironment(index, value, tbpos, Instance)
     local information = instance.Information
     local indexWidth = TextService:GetTextSize(tbpos, 18, "SourceSans", constants.textWidth).X + 8    
 
-    information.Icon.Image = "http://www.roblox.com/asset/?id=5538723428"
+    information.Icon.Image = (oh.Constants.Types[typeof(value)] or "http://www.roblox.com/asset/?id=5538723428")
     information.Icon.ImageColor3 = Color3.fromRGB(139, 190, 255)
     information.Label.TextColor3 = Color3.fromRGB(139, 190, 255)
 
@@ -192,10 +182,7 @@ local function createEnvironment(index, value, tbpos, Instance)
     information.Label.Size = UDim2.new(1, -(indexWidth + 20), 1, 0)
     information.Icon.Position = UDim2.new(0, indexWidth, 0, 2)
     information.Label.Position = UDim2.new(0, indexWidth + 20, 0, 0)
-    information.Label.Text = (toString(index)=="" and "Empty String" or toString(index))
-    if toString(index)=="" then
-        information.Label.TextColor3=oh.Constants.Syntax["unnamed_env"]
-    end
+    information.Label.Text = toString(index)
 
     ListButton.new(instance, environmentList):SetRightCallback(function()
         selected.selectedEnv={index=index, value=value, numindex=tbpos, Instance=Instance}
@@ -229,7 +216,6 @@ function Log.new(localScript)
 
             local nameLength = TextService:GetTextSize(scriptName, 18, "SourceSans", constants.textWidth).X + 20
             
-            InfoScript.Icon.Image = icons.LocalScript
             InfoScript.Label.Text = scriptName
             InfoScript.Label.Size = UDim2.new(0, nameLength, 0, 20)
             InfoScript.Position = UDim2.new(1, -nameLength, 0, 0)
