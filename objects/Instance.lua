@@ -1,4 +1,5 @@
 local instance = {}
+local Methods = import("modules/InstanceViewer")
 
 function instance.new(instance)
     local newInstance = {}
@@ -8,15 +9,8 @@ function instance.new(instance)
     newInstance.Descendants = instance:GetDescendants()
     newInstance.Children = instance:GetChildren()
     newInstance.IsService = (instance.Parent==game)
-    newInstance.Properties={}
-    newInstance.FillProperties=function() -- Prevent slow loading
-        local api=game:GetService("HttpService"):JSONDecode(game:HttpGet("https://anaminus.github.io/rbx/json/api/latest.json"))
-        table.foreach(api, function(_, v)
-            if (v.Class) and (v.Class==typeof(instance) or v.Class==instance.ClassName or instance:IsA(v.Class)) and (not v.Type or v.Type~="Function") then
-                newInstance.Properties[v.Name]=instance[v.Name]
-            end
-        end)
-    end
+    newInstance.Properties=Methods.GetInstanceProperties(instance)
+    newInstance.Methods=Methods.GetInstanceMethods(instance)
     
     return newInstance
 end
