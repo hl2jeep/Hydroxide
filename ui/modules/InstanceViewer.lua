@@ -149,9 +149,8 @@ function Log.new(instance)
             InstanceInfo.Visible=true
             serviceList.Visible=false
 
-            instance.FillProperties()
             local num=1
-            for i,v in pairs(instance.Properties) do
+            for i,v in pairs(Methods.GetInstanceProperties(originalInstance)) do
                 createProperties(i,v, num)
                 num+=1
             end
@@ -198,7 +197,7 @@ Buttons.Methods.MouseButton1Click:Connect(function()
     local selectedInstance=selected.scriptLog.Instance
 
     local num=1
-    for i,v in pairs(selectedInstance.Methods) do
+    for i,v in pairs(Methods.GetInstanceMethods(selectedInstance.Instance)) do
         createMethods(i, v, num)
         num+=1
     end
