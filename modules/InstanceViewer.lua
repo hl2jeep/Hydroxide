@@ -330,8 +330,8 @@ function Icon(IconFrame, index) -- Stolen from DarkDex aswell
     return IconFrame
 end
 
-function setToInstanceIcon(Icon, Instance)
-    Icon(Icon, InstanceIcons[Instance.ClassName] or 4800244808)
+function setToInstanceIcon(Icon, PassedInstance)
+    Icon(Icon, InstanceIcons[(PassedInstance.ClassName and PassedInstance.ClassName or typeof(PassedInstance))] or 4800244808)
 end
 
 InstanceViewer.RequiredMethod=requiredMethods
