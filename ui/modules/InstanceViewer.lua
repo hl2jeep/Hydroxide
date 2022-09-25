@@ -140,7 +140,7 @@ function Log.new(instance)
     button:FindFirstChild("Name").Text = originalInstance.ClassName
     button.Methods.Text = #Methods.GetInstanceMethods(originalInstance)
     button.Descendants.Text = #instance.Descendants
-    Methods.SetToInstanceIcon(button.Icon, originalInstance)
+    button.Icon.Image="rbxassetid://4800244808"
 
     listButton:SetCallback(function()
         if selected.scriptLog~=log then
