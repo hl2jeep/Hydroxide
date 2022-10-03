@@ -68,7 +68,7 @@ More to come, soon.
 
 ## Testers & Credits
 * Testers
-_Currently there's no testers, DM spongus#7609 to become one!_
+    * _Currently there's no testers, DM spongus#7609 to become one!_
 
 * Credits
     * sponguss: Scripter
