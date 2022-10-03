@@ -7,14 +7,14 @@ local function webImport(file)
     return loadstring(game:HttpGetAsync(("https://raw.githubusercontent.com/%s/Hydroxide/%s/%s.lua"):format(owner, branch, file)), file .. '.lua')()
 end
 
-webImport("init")
+webImport("init") -- ctuidseehv ^-^
 webImport("ui/main")
 ```
 
 # spongdroxide (Hydroxide)
 <i>General purpose pen-testing tool for games on the Roblox engine</i>
 
-Report issues to spongus's DMs (spongus#7609)
+Please report issues at the "Issues" tab in github, instead of DM'ing me
 
 <p align="center">
     <img src="https://cdn.discordapp.com/attachments/633472429917995038/722143730500501534/Hydroxide_Logo.png"/>
@@ -65,3 +65,15 @@ More to come, soon.
 - Quick Loading (Enabled by adding the "quick_loading.oh" file)
 - More error handlers for specific parts
 - Possibly faster at loading and other stuff
+
+## Testers & Credits
+* Testers
+_Currently there's no testers, DM spongus#7609 to become one!_
+
+* Credits
+    * sponguss: Scripter
+    * Upbolt: Creator of Hydroxide
+    * Dylann: Ideas
+    * brr/Brodi: Testing Game
+
+_Have any ideas or want to contribute to Spongdroxide? Make a pull request or DM spongus#7609 to be a developer!_
