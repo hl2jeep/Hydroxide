@@ -43,6 +43,10 @@ Report issues to spongus's DMs (spongus#7609)
 * ClosureSpy
     * Log calls of closures
     * View general information of closures (location, protos, constants, etc.)
+* Instance Viewer (WIP)
+    * View properties and methods of certain instances
+    * View how many descendants and methods an instance has
+    * Edit properties & run methods with any arguments
 
 More to come, soon.
 
@@ -51,3 +55,13 @@ More to come, soon.
     <img src="https://i.gyazo.com/63afdd764cdca533af5ebca843217a7e.gif" />
     <img src="https://cdn.upload.systems/uploads/KqYKbtD4.gif">
 </p>
+
+## Spongdroxide's Modifications
+- Source tab & Environment tab in Script Scanner are now fully functional
+- RemoteSpy has more context menu buttons, like "Copy Arguments"!
+- RGB Mode
+- View a module's return value (Module Scanner)
+- New instance viewer tab, which is not yet complete sadly
+- Quick Loading (Enabled by adding the "quick_loading.oh" file)
+- More error handlers for specific parts
+- Possibly faster at loading and other stuff
