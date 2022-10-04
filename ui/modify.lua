@@ -2,14 +2,6 @@ function modify(Interface)
     do -- Randomize Slogan
         local slogan=Interface.Base.Body.Pages.Home.Slogan
         local random={
-            "adam is my new boyfriend >.<",
-            "daddy~",
-            "ReD stands for REtarD",
-            "astolfo is so fucking hot",
-            "fr (feeling racist)",
-            "syn chan > krnl chan",
-            "No lunar, your stupid book cant predict the future",
-            "\"dev im getting raped by monkeys\" - jet",
             "Follow what the voices in your head say.",
             "GET OUT OF MY HEAD GET OUT OF MY HEAD",
             "The voices are getting louder",
@@ -17,7 +9,8 @@ function modify(Interface)
             "hydroxide jumpscare",
             "sometimes i think... but then i forget",
             "spongus amongus",
-            "i hate fucking ni-"
+            "i hate fucking ni ghtmares",
+            "Jet i already know you're getting raped by monkeys"
         }
         slogan.Text=random[math.random(1,#random)]
     end

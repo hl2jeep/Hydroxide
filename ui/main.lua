@@ -24,9 +24,9 @@ if not (isFile or function(...) return false end)("quick_loading.oh") then
 	end, function(err)
 		local message
 		if err:find("valid member") then
-			message = "The UI has updated, please rejoin and restart. If you get this message more than once, screenshot this message and report it to spongus#7609.\n\n" .. err
+			message = "The UI has updated, please rejoin and restart. If you get this message more than once, screenshot this message and report it to the github.\n\n" .. err
 		else
-			message = "Report this error to spongus#7609:\n\n" .. err
+			message = "Report this error to the github:\n\n" .. err
 		end
 
 		MessageBox.Show("An error has occurred", message, MessageType.OK, function()

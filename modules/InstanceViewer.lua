@@ -1,5 +1,5 @@
 local InstanceViewer={}
-local InstanceObj=import("objects/Instance")
+local InstanceObj=import("objects/OhInstance")
 local jsonApi=game:GetService("HttpService"):JSONDecode(game:HttpGet"https://anaminus.github.io/rbx/json/api/latest.json")
 
 local requiredMethods = {
@@ -47,22 +47,33 @@ local function getInstanceMethods(instance: Instance)
 	return Methods
 end
 
-local function getInstanceProperties(instance: Instance)
+local function getInstanceProperties(instance: Instance)-- might make this code better later
 	local Properties={}
-	local isService=pcall(function()
-		return game:GetService(instance.ClassName)
-	end)
-	table.foreach(jsonApi, function(_i, v)
-		pcall(function()
-			if (v.Class==instance.ClassName or v.Class=="Instance") and v.type=="Property" then
-				Properties[v.Name]={
-					type=v.ValueType,
-					tags=v.Tags,
-					value=(table.find(v.Tags, "hidden") and (getHiddenProperty or function(...) return nil end)(instance, v.Name) or instance[v.Name])
-				}
+	local function a()
+		table.foreach(jsonApi, function(_i, v)
+			pcall(function()
+				if (v.Class==instance.ClassName or v.Class=="Instance") and v.type=="Property" then
+					Properties[v.Name]={
+						type=v.ValueType,
+						tags=v.Tags,
+						value=(table.find(v.Tags, "hidden") and (getHiddenProperty or function(...) return nil end)(instance, v.Name) or instance[v.Name])
+					}
+				end
+			end)
+		end)
+	end
+	if getproperties then
+		table.foreach(getproperties(instance), function(i,v)
+			if KRNL_LOADED then
+				table.insert(Properties, i)
+			elseif identifyexecutor and identifyexecutor()=="ScriptWare" then
+				table.insert(Properties, v)
 			end
 		end)
-	end)
+		if not KRNL_LOADED and (identifyexecutor) and not identifyexecutor()=="ScriptWare" then a() end
+	else
+		a()
+	end
 	return Properties
 end
 

@@ -1,5 +1,5 @@
 local InstanceViewer={}
-pcall(function() -- As this is WIP, it might cause several problems
+xpcall(function() -- As this is WIP, it might cause several problems
     local TextService = game:GetService("TextService")
     local TweenService = game:GetService("TweenService")
 
@@ -43,7 +43,7 @@ pcall(function() -- As this is WIP, it might cause several problems
     local constants = {
         fadeLength = TweenInfo.new(0.15),
         textWidth = Vector2.new(133742069, 20)
-    }
+    } 
 
     local instanceCache={
         --[[
@@ -261,6 +261,9 @@ pcall(function() -- As this is WIP, it might cause several problems
             }
         end
     end
+end, function(e)
+    warn("spongdroxide ~ An error has been detected within the new tab (which is stil in testing) Instance Viewer, please report this issue in the Issues tab at our github")
+    warn(e)
 end)
 
 return InstanceViewer

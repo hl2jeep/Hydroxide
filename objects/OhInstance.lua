@@ -1,10 +1,10 @@
-local instance = {}
+local ohInstance = {}
 
-function instance.new(instance)
+function ohInstance.new(instance)
     local newInstance = {}
 
     newInstance.Instance = instance
-    newInstance.Path = instance:GetFullName()
+    newInstance.Path = getInstancePath(instance);
     newInstance.Descendants = instance:GetDescendants()
     newInstance.Children = instance:GetChildren()
     newInstance.IsService = (instance.Parent==game)
@@ -12,4 +12,4 @@ function instance.new(instance)
     return newInstance
 end
 
-return instance
+return ohInstance
