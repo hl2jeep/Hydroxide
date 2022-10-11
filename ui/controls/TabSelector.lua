@@ -91,6 +91,7 @@ for _i, tab in pairs(Tabs:GetChildren()) do
         }
 
         tab.MouseButton1Click:Connect(function()
+            import("ui/modules/"..tab.Name)
             if selectedTab ~= tab and Tabs:FindFirstChild(tab.Name) then
                 selectTab(tab.Name)
             end
