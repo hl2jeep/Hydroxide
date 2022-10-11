@@ -11,7 +11,7 @@ function LocalScript.new(instance)
     localScript.Constants = getConstants(closure)
     localScript.Protos = getProtos(closure)
     xpcall(function()
-        localScript.Source = decompileScript(instance)
+        localScript.Source = decompileScript(instance) or "This script has no source."
     end, function()
         localScript.Source = "There was an issue while decompiling."
     end)

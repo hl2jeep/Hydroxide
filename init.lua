@@ -86,7 +86,7 @@ local globalMethods = {
 	isFolder = isfolder,
 	isFile = isfile,
 	decompileScript = function(script: LocalScript | ModuleScript)
-		if not decompile or (identifyexecutor and identifyexecutor() == "ScriptWare") then
+		if not decompile then
 			return "This exploit has no decompiler."
 		end
 		return tostring(decompile(script))

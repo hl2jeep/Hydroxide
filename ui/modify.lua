@@ -10,7 +10,8 @@ function modify(Interface)
             "sometimes i think... but then i forget",
             "spongus amongus",
             "i hate fucking ni ghtmares",
-            "Jet i already know you're getting raped by monkeys"
+            "Jet i already know you're getting raped by monkeys",
+            "NIGHTMARE NIGHTMARE NIGHTMARE NIGHTMARE"
         }
         slogan.Text=random[math.random(1,#random)]
     end

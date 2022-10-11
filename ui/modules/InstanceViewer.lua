@@ -1,5 +1,5 @@
 local InstanceViewer={}
-xpcall(function() -- As this is WIP, it might cause several problems
+xpcall(function()
     local TextService = game:GetService("TextService")
     local TweenService = game:GetService("TweenService")
 
@@ -17,18 +17,13 @@ xpcall(function() -- As this is WIP, it might cause several problems
     local InstanceInfo = Page.Info
     local Buttons = InstanceInfo.Buttons
     local InfoSections = InstanceInfo
-    local optionsList = InstanceInfo.Results.Clip
     local serviceList = Page.List
-    local ResultContent = serviceList.Results.Clip
+
 
     local Query=serviceList.Query
     local Refresh=Query.Refresh
     local Search=Query.Search
     local Back=InstanceInfo.Back
-
-    local infoQuery=InstanceInfo.Results.Query
-    local infoRefresh=infoQuery.Refresh
-    local infoSearch=infoQuery.Search
 
     local InstanceProperties=optionsList.Properties
     local InstanceMethods=optionsList.Methods
@@ -261,9 +256,16 @@ xpcall(function() -- As this is WIP, it might cause several problems
             }
         end
     end
-end, function(e)
-    warn("spongdroxide ~ An error has been detected within the new tab (which is stil in testing) Instance Viewer, please report this issue in the Issues tab at our github")
-    warn(e)
+end, function(err)
+    local MessageBox, MessageType = import("ui/controls/MessageBox")
+    local message
+    if err:find("valid member") then
+        message = "The UI has updated, please rejoin and restart. If you get this message more than once, screenshot this message and report it to the github.\n\n" .. err
+    else
+        message = "Report this error to the github:\n\n" .. err .. " <InstanceViewer> "
+    end
+    
+    MessageBox.Show("An error has occurred", message, MessageType.OK)
 end)
 
 return InstanceViewer

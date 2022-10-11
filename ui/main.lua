@@ -9,38 +9,6 @@ if oh.Cache["ui/main"] then
 end
 
 import("ui/controls/TabSelector")
-local MessageBox, MessageType = import("ui/controls/MessageBox")
-
-if not (isFile or function(...) return false end)("quick_loading.oh") then
-	local a
-	xpcall(function()
-		a = import("ui/modules/RemoteSpy")
-		a = import("ui/modules/ClosureSpy")
-		a = import("ui/modules/ScriptScanner")
-		a = import("ui/modules/ModuleScanner")
-		a = import("ui/modules/UpvalueScanner")
-		a = import("ui/modules/ConstantScanner")
-		a = import("ui/modules/InstanceViewer")
-	end, function(err)
-		local message
-		if err:find("valid member") then
-			message = "The UI has updated, please rejoin and restart. If you get this message more than once, screenshot this message and report it to the github.\n\n" .. err
-		else
-			message = "Report this error to the github:\n\n" .. err
-		end
-
-		MessageBox.Show("An error has occurred", message, MessageType.OK, function()
-			Interface:Destroy() 
-		end)
-	end)
-end
-
-local constants = {
-	opened = UDim2.new(0.5, -325, 0.5, -175),
-	closed = UDim2.new(0.5, -325, 0, -400),
-	reveal = UDim2.new(0.5, -15, 0, 20),
-	conceal = UDim2.new(0.5, -15, 0, -75)
-}
 
 local Open = Interface.Open
 local Base = Interface.Base

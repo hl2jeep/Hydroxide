@@ -14,7 +14,7 @@ function ModuleScript.new(instance)
         return require(instance)
     end
     xpcall(function()
-        moduleScript.Source = decompileScript(instance)
+        moduleScript.Source = decompileScript(instance) or "This script has no source."
     end, function()
         moduleScript.Source = "There was an issue while decompiling."
     end)
