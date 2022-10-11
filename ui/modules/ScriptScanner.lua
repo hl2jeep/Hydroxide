@@ -57,6 +57,7 @@ xpcall(function()
     }
 
     local pathContext = ContextMenuButton.new("rbxassetid://4891705738", "Get Script Path")
+    local copyGUID=ContextMenuButton.new(oh.Constants.Types.string, "Copy Script GUID")
 
     local copyEnvContext = ContextMenuButton.new("rbxassetid://4891705738", "Copy Env Value")
     local copyProtoNameContext = ContextMenuButton.new("rbxassetid://4891705738", "Copy Proto Name")
@@ -68,13 +69,20 @@ xpcall(function()
     protosList:BindContextMenu(ContextMenu.new({ copyProtoNameContext, copyProtoInfoContext }))
     constantsList:BindContextMenu(ContextMenu.new({ copyConstantValue }))
 
-    scriptList:BindContextMenu(ContextMenu.new({ pathContext }))
+    scriptList:BindContextMenu(ContextMenu.new({ pathContext, copyGUID }))
 
     pathContext:SetCallback(function()
         local selectedInstance = selected.logContext.LocalScript.Instance
 
         setClipboard(dataToString(selectedInstance))
         MessageBox.Show("Success", ("%s's path was copied to your clipboard."):format(selectedInstance.Name), MessageType.OK)
+    end)
+
+    copyGUID:SetCallback(function()
+        local selectedInstance = selected.logContext.LocalScript.Instance
+
+        setClipboard(tostring(getHiddenProperty(selectedInstance, "ScriptGuid")))
+        MessageBox.Show("Success", ("%s's GUID was copied to your clipboard."):format(selectedInstance.Name), MessageType.OK)
     end)
 
     copyEnvContext:SetCallback(function()
