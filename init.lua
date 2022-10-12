@@ -179,6 +179,7 @@ environment.oh = {
 			unpack(assets):Destroy()
 		end
 	end,
+	ModuleList={"RemoteSpy", "ScriptScanner", "InstanceViewer", "ModuleScanner", "ConstantScanner", "ClosureSpy", "UpvalueScanner"}
 }
 
 pcall(function()

@@ -8,6 +8,12 @@ if oh.Cache["ui/main"] then
 	return Interface
 end
 
+coroutine.create(function() -- Load All Modules
+	for _, module in pairs(oh.ModuleList) do
+		import("ui/modules/"..module)
+		task.wait(.2)
+	end
+end)
 import("ui/controls/TabSelector")
 
 local Open = Interface.Open
