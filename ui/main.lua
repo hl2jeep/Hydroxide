@@ -11,7 +11,7 @@ end
 coroutine.create(function() -- Load All Modules
 	for _, module in pairs(oh.ModuleList) do
 		import("ui/modules/"..module)
-		task.wait(.2)
+		task.wait(.1)
 	end
 end)
 import("ui/controls/TabSelector")
