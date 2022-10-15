@@ -151,4 +151,6 @@ for _i, sectionButton in pairs(Info.Options.Clip.Content:GetChildren()) do
 		}
 	end
 end
+
+table.insert(oh.LoadedTabs, "ModuleScanner")
 return ModuleScanner

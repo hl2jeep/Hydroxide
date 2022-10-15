@@ -1081,4 +1081,6 @@ Methods.ConnectEvent(function(remoteInstance, callInfo)
         pcall(log.IncrementCalls, callInfo)
 	end
 end)
+
+table.insert(oh.LoadedTabs, "RemoteSpy")
 return RemoteSpy

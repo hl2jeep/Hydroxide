@@ -205,4 +205,5 @@ SearchBox.FocusLost:Connect(function(returned)
 	end
 end)
 
+table.insert(oh.LoadedTabs, "ConstantScanner")
 return ConstantScanner

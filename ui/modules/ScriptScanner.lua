@@ -364,4 +364,5 @@ for _i, sectionButton in pairs(InfoOptions:GetChildren()) do
 	end
 end
 
+table.insert(oh.LoadedTabs, "ScriptScanner")
 return ScriptScanner

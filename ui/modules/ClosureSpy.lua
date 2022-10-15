@@ -870,4 +870,6 @@ Methods.SetEvent(function(hook, call)
 
 	setContext(oldContext)
 end)
+
+table.insert(oh.LoadedTabs, "ClosureSpy")
 return ClosureSpy

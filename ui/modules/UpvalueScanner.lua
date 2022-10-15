@@ -622,4 +622,6 @@ oh.Events.UpdateUpvalues = RunService.Heartbeat:Connect(function()
 		closureLog:Update()
 	end
 end)
+
+table.insert(oh.LoadedTabs, "UpvalueScanner")
 return UpvalueScanner

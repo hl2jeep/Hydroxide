@@ -258,4 +258,6 @@ for _i, sectionButton in pairs(Buttons:GetChildren()) do
 		}
 	end
 end
+
+table.insert(oh.LoadedTabs, "InstanceViewer")
 return InstanceViewer

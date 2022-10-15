@@ -65,14 +65,14 @@ local function selectTab(tabName)
     end
 
     selectedPage.Visible = false
-    page.Visible = true
+    (oh.LoadedModules[tabName] and page or Pages:FindFirstChild("LoadingIssue")).Visible = true
     tab.ImageColor3 = constants.tabSelected
     tab.Icon.ImageColor3 = constants.iconSelected
 
     oh.setStatus(page.Name:sub(1, 1) .. page.Name:sub(2):gsub('%u', function(c) return ' ' .. c end))
     
     selectedTab = tab
-    selectedPage = page
+    selectedPage = (oh.LoadedModules[tabName] and page or Pages:FindFirstChild"LoadingIssue")
     return true
 end
 
