@@ -320,7 +320,7 @@ function Log.new(remote)
 	button.Name = remoteInstanceName
 	button.Label.Text = remoteInstanceName
 	button.Icon.Image = icons[remoteClassName]
-	if remoteInstance.Parent.Name == "DefaultChatSystemChatEvents" and remoteInstance.Parent:IsA("Folder") then
+	if remoteInstance.Parent~=nil and remoteInstance.Parent.Name == "DefaultChatSystemChatEvents" and remoteInstance.Parent:IsA("Folder") then
 		button.Label.TextColor3 = Color3.fromRGB(255, 239, 115)
 	end
 
