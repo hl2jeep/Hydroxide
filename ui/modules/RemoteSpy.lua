@@ -407,7 +407,11 @@ local function createArg(instance, index, value)
 			arg.Label.Text = "Empty Table"
 			a = oh.Constants.Syntax["empty_table"]
 		else
-			arg.Label.Text = "Table"
+            if isArray(value) then
+                arg.Label.Text = "Array #"..#value
+            else
+                arg.Label.Text = "Dictionary #"..#value
+            end
 		end
 	elseif valueType == "function" then
 		local name = getInfo(value).name
@@ -510,10 +514,7 @@ function Log.incrementCalls(log, callInfo)
 	local buttonInstance = log.Button.Instance
 	local remote = log.Remote
 	local calls = remote.Calls
-
-	pcall(function()
-		buttonInstance.Calls.Text = (calls < 10000 and calls) or "..."
-	end)
+	buttonInstance.Calls.Text = (calls < 10000 and calls) or "..."
 
 	log:Adjust()
 
@@ -1077,7 +1078,7 @@ Methods.ConnectEvent(function(remoteInstance, callInfo)
 		local remote = currentRemotes[remoteInstance]
 		local log = currentLogs[remoteInstance] or Log.new(remote)
 
-		log:IncrementCalls(callInfo)
+        pcall(log.IncrementCalls, callInfo)
 	end
 end)
 return RemoteSpy

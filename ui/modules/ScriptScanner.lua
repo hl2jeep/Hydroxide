@@ -58,6 +58,7 @@ local constants = {
 
 local pathContext = ContextMenuButton.new("rbxassetid://4891705738", "Get Script Path")
 local copyGUID = ContextMenuButton.new(oh.Constants.Types.string, "Copy Script GUID")
+local desContext = ContextMenuButton.new(oh.Constants.Types.boolean, "Disable Script")
 
 local copyEnvContext = ContextMenuButton.new("rbxassetid://4891705738", "Copy Env Value")
 local copyProtoNameContext = ContextMenuButton.new("rbxassetid://4891705738", "Copy Proto Name")
@@ -69,7 +70,7 @@ environmentList:BindContextMenu(ContextMenu.new({ copyEnvContext }))
 protosList:BindContextMenu(ContextMenu.new({ copyProtoNameContext, copyProtoInfoContext }))
 constantsList:BindContextMenu(ContextMenu.new({ copyConstantValue }))
 
-scriptList:BindContextMenu(ContextMenu.new({ pathContext, copyGUID }))
+scriptList:BindContextMenu(ContextMenu.new({ pathContext, copyGUID, desContext }))
 
 pathContext:SetCallback(function()
 	local selectedInstance = selected.logContext.LocalScript.Instance
@@ -80,6 +81,12 @@ pathContext:SetCallback(function()
 		("%s's path was copied to your clipboard."):format(selectedInstance.Name),
 		MessageType.OK
 	)
+end)
+
+desContext:SetCallback(function()
+    local selectedInstance = selected.logContext.LocalScript.Instance
+
+    selectedInstance.Enabled=not selectedInstance.Enabled
 end)
 
 copyGUID:SetCallback(function()
@@ -271,6 +278,11 @@ function Log.new(localScript)
 	end)
 
 	listButton:SetRightCallback(function()
+        if scriptInstance.Enabled==true then
+            desContext:SetText("Disable Script")
+        else
+            desContext:SetText("Enable Script")
+        end
 		selected.logContext = log
 	end)
 
