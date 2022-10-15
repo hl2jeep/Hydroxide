@@ -1,5 +1,14 @@
 local methods = {}
 
+local function isArray(t)
+    local i = 0
+    for _ in pairs(t) do
+        i = i + 1
+        if t[i] == nil then return false end
+    end
+    return true
+end
+
 local function tableToString(data, root, indents)
     local dataType = type(data)
 
@@ -52,4 +61,5 @@ end
 
 methods.tableToString = tableToString
 methods.compareTables = compareTables
+methods.isArray = isArray
 return methods
