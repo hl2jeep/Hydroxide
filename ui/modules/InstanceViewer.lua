@@ -15,17 +15,17 @@ local Assets = import("rbxassetid://10924729710").InstanceViewer
 local Page = Base.Body.Pages.InstanceViewer
 local InstanceInfo = Page.Info
 local Buttons = InstanceInfo.Buttons
-local InfoSections = InstanceInfo
 local serviceList = Page.List
+local ResultContent = serviceList.Results.Clip
 
 local Query = serviceList.Query
 local Refresh = Query.Refresh
 local Search = Query.Search
 local Back = InstanceInfo.Back
 
-local InstanceProperties = optionsList.Properties
-local InstanceMethods = optionsList.Methods
-local InstanceDescendants = optionsList.Descendants
+local InstanceProperties = InstanceInfo.Properties
+local InstanceMethods = InstanceInfo.Methods
+local InstanceDescendants = InstanceInfo.Descendants
 
 local animationCache = {}
 local icons = {
