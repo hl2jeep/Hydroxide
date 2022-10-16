@@ -47,6 +47,10 @@ Please report issues at the "Issues" tab in github, instead of DM'ing me
     * View properties and methods of certain instances
     * View how many descendants and methods an instance has
     * Edit properties & run methods with any arguments
+* Http Spy (TESTING)
+    * Log the use of the request or syn.request function
+    * Log the use of game:HttpGet and game:HttpGetAsync
+    * Log the use of HttpService's request functions 
 
 More to come, soon.
 
