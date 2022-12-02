@@ -91,7 +91,8 @@ local globalMethods = {
 		end
 		return tostring(decompile(script))
 	end,
-	getHiddenProperty=gethiddenproperty or get_hidden_property or get_hidden_prop
+	getHiddenProperty=gethiddenproperty or get_hidden_property or get_hidden_prop,
+	exploitRequest = request or (syn and syn.request) or http_request or (http and http.request)
 }
 
 if PROTOSMASHER_LOADED then
@@ -168,7 +169,7 @@ environment.oh = {
 			end
 		end
 
-		local ui = importCache["rbxassetid://10922275113"]
+		local ui = importCache["rbxassetid://11389137937"]
 		local assets = importCache["rbxassetid://10924729710"]
 
 		if ui then
@@ -223,7 +224,7 @@ local releaseInfo =
 
 if readFile and writeFile then
 	local hasFolderFunctions = (isFolder and makeFolder) ~= nil
-	local ran, result = pcall(readFile, "version.oh")
+	local ran, result = pcall(readFile, "__sOh_version.txt")
 
 	if not ran or releaseInfo.tag_name ~= result then
 		if hasFolderFunctions then
@@ -314,7 +315,7 @@ if readFile and writeFile then
 			return unpack(assets)
 		end
 
-		writeFile("version.oh", (releaseInfo and releaseInfo.tag_name or "Unknown"))
+		writeFile("__sOh_version.txt", (releaseInfo and releaseInfo.tag_name or "Unknown"))
 	elseif ran and releaseInfo.tag_name == result then
 		function environment.import(asset)
 			if importCache[asset] then

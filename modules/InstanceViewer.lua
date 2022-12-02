@@ -2,14 +2,7 @@ local InstanceViewer={}
 local InstanceObj=import("objects/OhInstance")
 local jsonApi=game:GetService("HttpService"):JSONDecode(game:HttpGet"https://anaminus.github.io/rbx/json/api/latest.json")
 
-local requiredMethods = {
-    ["getGc"] = true,
-    ["getSenv"] = true,
-    ["getProtos"] = true,
-    ["getConstants"] = true,
-    ["getScriptClosure"] = true,
-    ["isXClosure"] = true
-}
+local requiredMethods = {}
 
 local function scan(query)
     local services = {}
