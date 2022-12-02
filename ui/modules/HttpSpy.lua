@@ -8,7 +8,7 @@ end
 local List, ListButton = import("ui/controls/List")
 local ContextMenu, ContextMenuButton = import("ui/controls/ContextMenu")
 
-local Page = import("rbxassetid://11389137937").Base.Body.Pages.HttpSpy
+local Page = import("rbxassetid://10922275113").Base.Body.Pages.HttpSpy
 local Assets = import("rbxassetid://10924729710").HttpSpy
 
 local InfoList = Page.List

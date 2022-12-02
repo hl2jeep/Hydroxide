@@ -19,7 +19,7 @@ local MessageBox, MessageType = import("ui/controls/MessageBox")
 local ContextMenu, ContextMenuButton = import("ui/controls/ContextMenu")
 local TabSelector = import("ui/controls/TabSelector")
 
-local Base = import("rbxassetid://11389137937").Base
+local Base = import("rbxassetid://10922275113").Base
 local Assets = import("rbxassetid://10924729710").RemoteSpy
 
 local Prompts = Base.Prompts
