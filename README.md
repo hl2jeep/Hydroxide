@@ -24,7 +24,7 @@ Please report issues at the "Issues" tab in github, instead of DM'ing me
 
 ## Features
 * Upvalue Scanner
-    * View/Modify Upvalues
+    - View/Modify Upvalues
     * View first-level values in table upvalues
     * View information of closure
 * Constant Scanner
@@ -47,6 +47,11 @@ Please report issues at the "Issues" tab in github, instead of DM'ing me
     * View properties and methods of certain instances
     * View how many descendants and methods an instance has
     * Edit properties & run methods with any arguments
+* Http Spy (TESTING)
+    * Log the use of the request or syn.request function
+    * Log the use of game:HttpGet and game:HttpGetAsync
+    * Log the use of HttpService's request functions (SOON)
+    * Prevent people from using anti-HttpSpy
 
 More to come, soon.
 
@@ -65,6 +70,7 @@ More to come, soon.
 - Quick Loading (Enabled by adding the "quick_loading.oh" file)
 - More error handlers for specific parts
 - Possibly faster at loading and other stuff
+- A new HTTPSPY tab
 
 ## Testers & Credits
 * Testers
