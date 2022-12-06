@@ -22,7 +22,7 @@ local Base = Interface.Base
 local Drag = Base.Drag
 local Status = Base.Status
 local Collapse = Drag.Collapse
-local Exit = Drag.Exit
+--local Exit = Drag.Exit
 
 function oh.setStatus(text)
 	Status.Text = '• Status: ' .. text
