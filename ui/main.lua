@@ -70,10 +70,6 @@ Collapse.MouseButton1Click:Connect(function()
 	Open:TweenPosition(constants.reveal, "Out", "Quad", 0.15)
 end)
 
-Exit.MouseButton1Click:Connect(function()
-	oh.Exit()
-end)
-
 Interface.Name = HttpService:GenerateGUID(false)
 if getHui then
 	Interface.Parent = getHui()
